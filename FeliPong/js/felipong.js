@@ -459,13 +459,14 @@ function arrowControlLogic(){
 });*/
 canvas.addEventListener("touchmove", evento =>{
     let rect = canvas.getBoundingClientRect();
-    user.y = evento.touches[0].pageY - rect.top - user.height/2; 
+    user.y = evento.touches[0].pageY - rect.offsetTop - user.height/2; 
     if(user.y <= 0){
         user.y = 0;
     }
     if(user.y + user.height >= canvas.height){
         user.y = canvas.height - user.height;
     }
+    event.preventDefault();
 }); 
 /*canvas.addEventListener("touchend", evento =>{
     return user.y;
