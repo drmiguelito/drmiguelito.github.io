@@ -459,7 +459,7 @@ canvas.addEventListener("touchstart", evento =>{
 });
 canvas.addEventListener("touchmove", evento =>{
     let rect = canvas.getBoundingClientRect();
-    user.y = evento.clientY - rect.top - user.height/2; 
+    user.y = evento.pageY - rect.top - user.height/2; 
     if(user.y <= 0){
         user.y = 0;
     }
