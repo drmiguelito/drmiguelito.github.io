@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<!-- Small game based on Pong of 1972. I used my own family as characters, the main of them is my son Felipe 💕, that's the reason of the name of the game-->
+    <head>
+        <meta charset="UTF-8">
+        <title>Pong-Game 🥎💥</title>
+        <link rel="stylesheet" href="estilos.css">
+    </head>
+    <body> 
+        <h2>Pong-Game in JavaScript</h2>
+        <canvas id="pong" width="600" height="400"></canvas>
+        <script src="pong-game.js"></script>
+    </body>
+</html>
