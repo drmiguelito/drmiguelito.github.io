@@ -456,7 +456,7 @@ function arrowControlLogic(){
 //--->TOUCH SCREEN
 canvas.addEventListener("touchstart", arrowOn);
 canvas.addEventListener("touchmove", arrowOn);
-canvas.addEventListener("touchmove", arrowOff);
+canvas.addEventListener("touchend", arrowOff);
 
 function touchHandler(evento){
     if(evento.touches){
