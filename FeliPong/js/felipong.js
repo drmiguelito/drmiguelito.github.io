@@ -454,10 +454,11 @@ function arrowControlLogic(){
     }
 }
 //--->TOUCH SCREEN
-/*canvas.addEventListener("touchstart", evento =>{
-    return user.y
-});*/
-canvas.addEventListener("touchmove", evento =>{
+canvas.addEventListener("touchstart", touchHandler);
+canvas.addEventListener("touchmove", touchHandler);
+canvas.addEventListener("touchend", touchHandler);
+
+function touchHandler(evento){
     let rect = canvas.getBoundingClientRect();
     user.y = evento.touches[0].pageY - rect.offsetTop - user.height/2; 
     if(user.y <= 0){
@@ -467,11 +468,7 @@ canvas.addEventListener("touchmove", evento =>{
         user.y = canvas.height - user.height;
     }
     event.preventDefault();
-}); 
-/*canvas.addEventListener("touchend", evento =>{
-    return user.y;
-});*/
-
+}
 //****Lógica del juego***
 //-->Detección de colisiones
 function collision(b, p){  
