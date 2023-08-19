@@ -318,17 +318,19 @@ function arrowControlLogic(){
 canvas.addEventListener("touchstart", touchHandler);
 canvas.addEventListener("touchmove", touchHandler);
 function touchHandler(evento){
-    if(evento.touches){
-        let rect = canvas.getBoundingClientRect();
-        user.y = evento.touches[0].pageY - rect.offsetTop - user.height/2;
-        if(user.y <= 0){
-            user.y = 0;
-        }
-        if(user.y + user.height >= canvas.height){
-            user.y = canvas.height - user.height;
-        }
-        evento.preventDefault();
-    }        
+    if(screenGame && !screenSelectChar){
+        if(evento.touches){
+            let rect = canvas.getBoundingClientRect();
+            user.y = evento.touches[0].pageY - rect.offsetTop - user.height/2;
+            if(user.y <= 0){
+                user.y = 0;
+            }
+            if(user.y + user.height >= canvas.height){
+                user.y = canvas.height - user.height;
+            }
+            evento.preventDefault();
+        }    
+    }      
 }
 //--->CANVAS SCREEN BUTTONS
 //Botón nivel de dificultad
