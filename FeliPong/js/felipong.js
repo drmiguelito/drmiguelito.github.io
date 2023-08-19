@@ -18,8 +18,6 @@ let soundSelectToPlay = new Audio();
 let bgMusic = new Audio();
 let playerWins = new Audio();
 let cpuWins = new Audio();
-let hit = new Audio();
-let wall = new Audio();
 let userScore = new Audio();
 let cpuScore = new Audio();
 bgMusicSelectChar.src ="audio/trololo8bits.mp3";
@@ -29,8 +27,6 @@ soundSelectToPlay.src = "audio/selectCharToPlay8bits.mp3";
 bgMusic.src ="audio/finalCountdown8bits.mp3";
 playerWins.src="audio/whatIsLove8bits.mp3";
 cpuWins.src="audio/itsMyLife8bits.mp3";
-hit.src ="";
-wall.src="";
 userScore="";
 cpuScore="";
 
@@ -516,13 +512,11 @@ function update(){
     cpu.y += ((ball.y - (cpu.y + cpu.height/2)))*difficultyLevel;
     if (ball.y - ball.radius <= 0 || ball.y + ball.radius >= canvas.height){
         ball.velocidadY = -ball.velocidadY;
-        //wall.play();
     }
     let player = (ball.x + ball.radius < canvas.width/2) ? user : cpu;
     
     //--Colision--
     if(collision(ball, player)){
-        //hit.play();
         let collidePoint = (ball.y - (player.y + player.height/2));
         //Punto de colision
         collidePoint = collidePoint / (player.height / 2);
