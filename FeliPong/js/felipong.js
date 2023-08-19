@@ -454,6 +454,7 @@ function arrowControlLogic(){
     }
 }
 //--->TOUCH SCREEN
+/*
 canvas.addEventListener("touchstart", evento =>{
     return user.y
 });
@@ -469,7 +470,7 @@ canvas.addEventListener("touchmove", evento =>{
 }); 
 canvas.addEventListener("touchend", evento =>{
     return user.y;
-});
+});*/
 
 //****Lógica del juego***
 //-->Detección de colisiones
