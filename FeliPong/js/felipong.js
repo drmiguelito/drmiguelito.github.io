@@ -460,7 +460,7 @@ canvas.addEventListener("touchmove", touchHandler);
 function touchHandler(evento){
     if(evento.touches){
         let rect = canvas.getBoundingClientRect();
-        user.y = evento.touches[0].pageY - rect.offsetTop - user.height/2;
+        user.y = evento.touches[0].clientY - rect.offsetTop - user.height/2;
         if(user.y <= 0){
             user.y = 0;
         }
