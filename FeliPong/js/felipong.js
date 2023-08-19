@@ -454,13 +454,12 @@ function arrowControlLogic(){
     }
 }
 //--->TOUCH SCREEN
-/*
-canvas.addEventListener("touchstart", evento =>{
+/*canvas.addEventListener("touchstart", evento =>{
     return user.y
-});
+});*/
 canvas.addEventListener("touchmove", evento =>{
     let rect = canvas.getBoundingClientRect();
-    user.y = evento.pageY - rect.top - user.height/2; 
+    user.y = evento.touches[0].pageY - rect.top - user.height/2; 
     if(user.y <= 0){
         user.y = 0;
     }
@@ -468,7 +467,7 @@ canvas.addEventListener("touchmove", evento =>{
         user.y = canvas.height - user.height;
     }
 }); 
-canvas.addEventListener("touchend", evento =>{
+/*canvas.addEventListener("touchend", evento =>{
     return user.y;
 });*/
 
