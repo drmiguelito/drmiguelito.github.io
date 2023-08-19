@@ -454,22 +454,24 @@ function arrowControlLogic(){
     }
 }
 //--->TOUCH SCREEN
-canvas.addEventListener("touchstart", touchHandler);
+canvas.addEventListener("touchend", touchHandler);
 canvas.addEventListener("touchmove", touchHandler);
 
 function touchHandler(evento){
-    let rect = canvas.getBoundingClientRect();
-    user.y = evento.touches[0].pageY - rect.offsetTop - user.height/2;
-    output.textContent = `Touch:  y: ${user.y}`;
-    if(user.y <= 0){
-        user.y = 0;
+    if(screenGame && !screenSelectChar){
+        let rect = canvas.getBoundingClientRect();
+        user.y = evento.touches[0].pageY - rect.top - user.height/2;
+        if(user.y <= 0){
+            user.y = 0;
+        }
+        if(user.y + user.height >= canvas.height){
+            user.y = canvas.height - user.height;
+        }
+        event.preventDefault();
     }
-    if(user.y + user.height >= canvas.height){
-        user.y = canvas.height - user.height;
-    }
-    event.preventDefault();
+
 }
-//****Lógica del juego***
+    //****Lógica del juego***
 //-->Detección de colisiones
 function collision(b, p){  
     //player (p)
