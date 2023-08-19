@@ -454,21 +454,19 @@ function arrowControlLogic(){
     }
 }
 //--->TOUCH SCREEN
-canvas.addEventListener("touchstart", arrowOn);
-canvas.addEventListener("touchmove", arrowOn);
-canvas.addEventListener("touchend", arrowOff);
-
+canvas.addEventListener("touchstart", touchHandler);
+canvas.addEventListener("touchmove", touchHandler);
 function touchHandler(evento){
     if(evento.touches){
         let rect = canvas.getBoundingClientRect();
-        user.y = evento.touches[0].clientY - rect.offsetTop - user.height/2;
+        user.y = evento.touches[0].pageY - rect.offsetTop - user.height/2;
         if(user.y <= 0){
             user.y = 0;
         }
         if(user.y + user.height >= canvas.height){
             user.y = canvas.height - user.height;
         }
-        event.preventDefault();
+        evento.preventDefault();
     }        
 }
     //****Lógica del juego***
