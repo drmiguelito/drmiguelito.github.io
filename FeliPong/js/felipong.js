@@ -198,16 +198,16 @@ let selectCharText = "TALA"; //nombre de personaje por default
 var textAlignWidth = canvas.width/2-32; //corrige alineación de nombre del personaje
 
 //---->MOUSE CONTROL
-canvas.addEventListener("click", (event) => { //pantallas y selección
+canvas.addEventListener("click", (evento) => { //pantallas y selección
     //Pantalla de selección de personaje
     if(screenSelectChar){ 
-        const isPointInPath = contexto.isPointInPath(btSelectRight, event.offsetX, event.offsetY);
+        const isPointInPath = contexto.isPointInPath(btSelectRight, evento.offsetX, evento.offsetY);
         contexto.fillStyle = isPointInPath ? dentroBtDerecho() : fuera();
-        const isPointInPath2 = contexto.isPointInPath(btSelectLeft, event.offsetX, event.offsetY);
+        const isPointInPath2 = contexto.isPointInPath(btSelectLeft, evento.offsetX, evento.offsetY);
         contexto.fillStyle = isPointInPath2 ? dentroBtIzquierdo() : fuera();
-        const isPointInPath3 = contexto.isPointInPath(btSelectPlayer, event.offsetX, event.offsetY);
+        const isPointInPath3 = contexto.isPointInPath(btSelectPlayer, evento.offsetX, evento.offsetY);
         contexto.fillStyle = isPointInPath3 ? dentroBtSelect() : fuera();
-        const isPointInPath4 = contexto.isPointInPath(btSelectLevel, event.offsetX, event.offsetY);
+        const isPointInPath4 = contexto.isPointInPath(btSelectLevel, evento.offsetX, evento.offsetY);
         contexto.fillStyle = isPointInPath4 ? dentroBtNivel() : fuera();
     }
     //Pantalla de bienvenida
@@ -234,6 +234,106 @@ canvas.addEventListener("mousemove", (evento) => { //juego
         }
     }
 });  
+//--->KEYBOARD CONTROL
+window.addEventListener("keydown", arrowOn, false);
+window.addEventListener("keyup", arrowOff, false);
+var arrowUp = false;
+var arrowDown = false; 
+
+function arrowOn(evento){
+    if(screenGame){ //pantalla de juego
+        if(evento.keyCode == 38 || evento.key == "ArrowUp") {
+            arrowUp = true;
+        }
+        else if(evento.keyCode == 40 || evento.key == "ArrowDown") {
+            arrowDown = true;
+            arrowUp = false;
+        }
+        else if(evento.key == "Enter"){
+            if(!paused){
+                paused = true;
+            }
+            if(paused){
+                paused = false;
+            }
+        }
+    }
+    if(screenSelectChar && !screenGame){ //pantalla de selección de personaje
+        if(evento.keyCode == 39 || evento.key == "ArrowRight"){
+            dentroBtDerecho();
+        }
+        if(evento.keyCode == 37 || evento.key == "ArrowLeft"){
+            dentroBtIzquierdo();
+        }
+        if(evento.key == "Enter"){
+            dentroBtSelect();
+        }
+        if(evento.keyCode == 38 || evento.key == "ArrowUp") {
+            dentroBtNivel();
+        }
+        else if(evento.keyCode == 40 || evento.key == "ArrowDown") {
+            dentroBtNivel();
+        }
+    }
+    if(screenWelcome){
+        if(evento.key == "Enter"){
+            screenWelcome = false;
+            screenSelectChar = true;
+            bgMusicSelectChar.play();
+        }
+    } 
+    //Pantalla de créditos
+    if(screenLoad){ 
+        if(evento.key == "Enter"){
+            screenLoad = false;
+            screenWelcome = true;
+        }
+    }
+}
+function arrowOff(evento){
+    if(screenGame){
+        if(evento.key == 38 || evento.key == "ArrowUp") {
+            arrowUp = false;
+        }
+        else if(evento.key == "Down" || evento.key == "ArrowDown") {
+            arrowDown = false;
+        }
+    }
+}
+function arrowControlLogic(){
+    if(arrowUp) {
+        
+        if (user.y <= 0){
+            user.y = 0;
+        } else {
+            user.y -= 7;
+        }
+    }
+    if(arrowDown) {
+        
+        if (user.y + user.height >= canvas.height){
+            user.y = canvas.height - user.height;
+        } else {
+            user.y += 7;
+        }
+    }
+}
+//--->TOUCH SCREEN
+canvas.addEventListener("touchstart", touchHandler);
+canvas.addEventListener("touchmove", touchHandler);
+function touchHandler(evento){
+    if(evento.touches){
+        let rect = canvas.getBoundingClientRect();
+        user.y = evento.touches[0].pageY - rect.offsetTop - user.height/2;
+        if(user.y <= 0){
+            user.y = 0;
+        }
+        if(user.y + user.height >= canvas.height){
+            user.y = canvas.height - user.height;
+        }
+        evento.preventDefault();
+    }        
+}
 //--->CANVAS SCREEN BUTTONS
 //Botón nivel de dificultad
 const btSelectLevel = new Path2D(); 
@@ -368,106 +468,6 @@ function fuera(){
     if(screenSelectChar){
         //  //
     }
-}
-//--->KEYBOARD CONTROL
-window.addEventListener("keydown", arrowOn, false);
-window.addEventListener("keyup", arrowOff, false);
-var arrowUp = false;
-var arrowDown = false; 
-
-function arrowOn(evento){
-    if(screenGame){ //pantalla de juego
-        if(evento.keyCode == 38 || evento.key == "ArrowUp") {
-            arrowUp = true;
-        }
-        else if(evento.keyCode == 40 || evento.key == "ArrowDown") {
-            arrowDown = true;
-            arrowUp = false;
-        }
-        else if(evento.key == "Enter"){
-            if(!paused){
-                paused = true;
-            }
-            if(paused){
-                paused = false;
-            }
-        }
-    }
-    if(screenSelectChar && !screenGame){ //pantalla de selección de personaje
-        if(evento.keyCode == 39 || evento.key == "ArrowRight"){
-            dentroBtDerecho();
-        }
-        if(evento.keyCode == 37 || evento.key == "ArrowLeft"){
-            dentroBtIzquierdo();
-        }
-        if(evento.key == "Enter"){
-            dentroBtSelect();
-        }
-        if(evento.keyCode == 38 || evento.key == "ArrowUp") {
-            dentroBtNivel();
-        }
-        else if(evento.keyCode == 40 || evento.key == "ArrowDown") {
-            dentroBtNivel();
-        }
-    }
-    if(screenWelcome){
-        if(evento.key == "Enter"){
-            screenWelcome = false;
-            screenSelectChar = true;
-            bgMusicSelectChar.play();
-        }
-    } 
-    //Pantalla de créditos
-    if(screenLoad){ 
-        if(evento.key == "Enter"){
-            screenLoad = false;
-            screenWelcome = true;
-        }
-    }
-}
-function arrowOff(evento){
-    if(screenGame){
-        if(evento.key == 38 || evento.key == "ArrowUp") {
-            arrowUp = false;
-        }
-        else if(evento.key == "Down" || evento.key == "ArrowDown") {
-            arrowDown = false;
-        }
-    }
-}
-function arrowControlLogic(){
-    if(arrowUp) {
-        
-        if (user.y <= 0){
-            user.y = 0;
-        } else {
-            user.y -= 7;
-        }
-    }
-    if(arrowDown) {
-        
-        if (user.y + user.height >= canvas.height){
-            user.y = canvas.height - user.height;
-        } else {
-            user.y += 7;
-        }
-    }
-}
-//--->TOUCH SCREEN
-//canvas.addEventListener("touchstart", touchHandler);
-canvas.addEventListener("touchmove", touchHandler);
-function touchHandler(evento){
-    if(evento.touches){
-        let rect = canvas.getBoundingClientRect();
-        user.y = evento.touches[0].pageY - rect.offsetTop - user.height/2;
-        if(user.y <= 0){
-            user.y = 0;
-        }
-        if(user.y + user.height >= canvas.height){
-            user.y = canvas.height - user.height;
-        }
-        evento.preventDefault();
-    }        
 }
     //****Lógica del juego***
 //-->Detección de colisiones
