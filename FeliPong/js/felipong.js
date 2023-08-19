@@ -393,7 +393,7 @@ function arrowOn(evento){
             }
         }
     }
-    if(screenSelectChar){ //pantalla de selección de personaje
+    if(screenSelectChar && !screenGame){ //pantalla de selección de personaje
         if(evento.keyCode == 39 || evento.key == "ArrowRight"){
             dentroBtDerecho();
         }
