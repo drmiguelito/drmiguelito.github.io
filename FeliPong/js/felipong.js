@@ -456,11 +456,11 @@ function arrowControlLogic(){
 //--->TOUCH SCREEN
 canvas.addEventListener("touchstart", touchHandler);
 canvas.addEventListener("touchmove", touchHandler);
-canvas.addEventListener("touchend", touchHandler);
 
 function touchHandler(evento){
     let rect = canvas.getBoundingClientRect();
-    user.y = evento.touches[0].pageY - rect.offsetTop - user.height/2; 
+    user.y = evento.touches[0].pageY - rect.offsetTop - user.height/2;
+    output.textContent = `Touch:  y: ${user.y}`;
     if(user.y <= 0){
         user.y = 0;
     }
