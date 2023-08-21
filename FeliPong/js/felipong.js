@@ -208,7 +208,7 @@ canvas.addEventListener("click", (evento) => { //pantallas y selección
         contexto.fillStyle = isPointInPath3 ? dentroBtSelect() : fuera();
         const isPointInPath4 = contexto.isPointInPath(btSelectLevel, evento.offsetX, evento.offsetY);
         contexto.fillStyle = isPointInPath4 ? dentroBtNivel() : fuera();
-    }
+    }  
     //Pantalla de bienvenida
     if(screenWelcome){
         screenWelcome = false;
@@ -301,7 +301,6 @@ function arrowOff(evento){
 }
 function arrowControlLogic(){
     if(arrowUp) {
-        
         if (user.y <= 0){
             user.y = 0;
         } else {
@@ -318,38 +317,37 @@ function arrowControlLogic(){
     }
 }
 //--->TOUCH SCREEN
-canvas.addEventListener("touchstart", function (e) {
-    mousePos = getTouchPos(canvas, e);
-    var touch = e.touches[0];
-    var mouseEvent = new MouseEvent("mousedown", {
-        clientX: touch.clientX,
-        clientY: touch.clientY
-    });
-    canvas.dispatchEvent(mouseEvent);
-}, false);
-canvas.addEventListener("touchend", function (e) {
-    var mouseEvent = new MouseEvent("mouseup", {});
-    canvas.dispatchEvent(mouseEvent);
-}, false);
-canvas.addEventListener("touchmove", function (e) {
-    var touch = e.touches[0];
-    var mouseEvent = new MouseEvent("mousemove", {
-        clientX: touch.clientX,
-        clientY: touch.clientY
-    });
-    canvas.dispatchEvent(mouseEvent);
-}, false);
-
-// Get the position of a touch relative to the canvas
-function getTouchPos(canvasDom, touchEvent) {
-var rect = canvasDom.getBoundingClientRect();
-return {
-x: touchEvent.touches[0].clientX - rect.left,
-y: touchEvent.touches[0].clientY - rect.top
-};
-alert(rect);
+window.addEventListener("touchstart", function (evento) {
+    if(screenGame){
+        let touch = evento.touches[0];
+        let mouseEvent = new MouseEvent("mousedown", {
+            clientX: touch.clientX,
+            clientY: touch.clientY
+        });
+        canvas.dispatchEvent(mouseEvent);
+        window.addEventListener("touchend", function (evento) {
+            let mouseEvent = new MouseEvent("mouseup", {});
+            canvas.dispatchEvent(mouseEvent);
+        }, false);
+        window.addEventListener("touchmove", function (evento) {
+            let touch = evento.touches[0];
+            let mouseEvent = new MouseEvent("mousemove", {
+                clientX: touch.clientX,
+                clientY: touch.clientY
+        });
+        canvas.dispatchEvent(mouseEvent);
+    }, false);
+    // Get the position of a touch relative to the canvas
+    function getTouchPos(canvasDom, touchEvent){
+        let rect = canvasDom.getBoundingClientRect();
+        const manejo = {
+            x: touchEvent.touches[0].clientX - rect.left,
+            y: touchEvent.touches[0].clientY - rect.top
+        };
+        return manejo;
+    }
 }
-//function touchHandler(evento){
+});   
     function getTouchPos(canvasDom, touchEvent) {
         var rect = canvasDom.getBoundingClientRect();
 
@@ -358,44 +356,6 @@ alert(rect);
           y: touchEvent.touches[0].clientY - rect.top
         };
       }
-    if(screenGame && !screenSelectChar){
-        if(evento.touches){
-
-            alert(touch.y);
-            if(y > user.y){
-                arrowUp = true;
-                arrowDown = false;
-            }
-            else if(pointer < user.y){
-                arrowUp = false;
-                arrowDown = true;
-            }
-            else{
-                arrowUp = false;
-                arrowDown = false;
-            }
-        }
-        else{ //evento.touches == false
-            arrowUp = false;
-            arrowDown = false;
-        }
-        arrowControlLogic();
-    }
-    
-//}
-
-/*        
-        
-        user.y = 
-        if(user.y <= 0){
-            user.y = 0;
-        }
-        if(user.y + user.height >= canvas.height){
-            user.y = canvas.height - user.height;
-        }
-        evento.preventDefault();*/
-      
-
 //--->CANVAS SCREEN BUTTONS
 //Botón nivel de dificultad
 const btSelectLevel = new Path2D(); 
