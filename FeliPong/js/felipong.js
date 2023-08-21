@@ -104,6 +104,9 @@ const net = {
     height: 10,
     color: "white"
 }
+const touch = {
+    y: 0
+}
 //--->Métodos
 //---Rectángulo
 function drawRect(x,y,w,h,color){
@@ -315,23 +318,84 @@ function arrowControlLogic(){
     }
 }
 //--->TOUCH SCREEN
-//canvas.addEventListener("touchstart", touchHandler);
-canvas.addEventListener("touchmove", touchHandler);
-function touchHandler(evento){
+canvas.addEventListener("touchstart", function (e) {
+    mousePos = getTouchPos(canvas, e);
+    var touch = e.touches[0];
+    var mouseEvent = new MouseEvent("mousedown", {
+        clientX: touch.clientX,
+        clientY: touch.clientY
+    });
+    canvas.dispatchEvent(mouseEvent);
+}, false);
+canvas.addEventListener("touchend", function (e) {
+    var mouseEvent = new MouseEvent("mouseup", {});
+    canvas.dispatchEvent(mouseEvent);
+}, false);
+canvas.addEventListener("touchmove", function (e) {
+    var touch = e.touches[0];
+    var mouseEvent = new MouseEvent("mousemove", {
+        clientX: touch.clientX,
+        clientY: touch.clientY
+    });
+    canvas.dispatchEvent(mouseEvent);
+}, false);
+
+// Get the position of a touch relative to the canvas
+function getTouchPos(canvasDom, touchEvent) {
+var rect = canvasDom.getBoundingClientRect();
+return {
+x: touchEvent.touches[0].clientX - rect.left,
+y: touchEvent.touches[0].clientY - rect.top
+};
+alert(rect);
+}
+//function touchHandler(evento){
+    function getTouchPos(canvasDom, touchEvent) {
+        var rect = canvasDom.getBoundingClientRect();
+
+        return {
+          x: touchEvent.touches[0].clientX - rect.left,
+          y: touchEvent.touches[0].clientY - rect.top
+        };
+      }
     if(screenGame && !screenSelectChar){
         if(evento.touches){
-            let rect = canvas.getBoundingClientRect();
-            user.y = evento.touches[0].pageY - rect.offsetTop - user.height/2;
-            if(user.y <= 0){
-                user.y = 0;
+
+            alert(touch.y);
+            if(y > user.y){
+                arrowUp = true;
+                arrowDown = false;
             }
-            if(user.y + user.height >= canvas.height){
-                user.y = canvas.height - user.height;
+            else if(pointer < user.y){
+                arrowUp = false;
+                arrowDown = true;
             }
-            evento.preventDefault();
-        }    
-    }      
-}
+            else{
+                arrowUp = false;
+                arrowDown = false;
+            }
+        }
+        else{ //evento.touches == false
+            arrowUp = false;
+            arrowDown = false;
+        }
+        arrowControlLogic();
+    }
+    
+//}
+
+/*        
+        
+        user.y = 
+        if(user.y <= 0){
+            user.y = 0;
+        }
+        if(user.y + user.height >= canvas.height){
+            user.y = canvas.height - user.height;
+        }
+        evento.preventDefault();*/
+      
+
 //--->CANVAS SCREEN BUTTONS
 //Botón nivel de dificultad
 const btSelectLevel = new Path2D(); 
