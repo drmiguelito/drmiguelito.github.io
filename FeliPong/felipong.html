@@ -9,6 +9,29 @@
     <body> 
         <h2>Pong-Game in JavaScript</h2>
         <canvas id="pong" width="600" height="400"></canvas>
+        
+        <script>alert(
+            "Falta: \n botón de reinicio de juego"+
+            "\n Botón de historia" +
+            "\n Animar titulos." +
+            "\n Animar festejo de ganador" +
+            "\n Animar boton de seleccion" +
+            "\n Responsive: mobile version"
+        );
+            function resize_canvas(){
+            canvas = document.getElementById("pong");
+            if (canvas.width  < window.innerWidth)
+            {
+                canvas.width  = window.innerWidth;
+            }
+
+            if (canvas.height < window.innerHeight)
+            {
+                canvas.height = window.innerHeight;
+            }
+        }
+    </script>
         <script src="js/felipong.js"></script>
+        
     </body>
 </html>
