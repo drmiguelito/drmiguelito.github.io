@@ -348,14 +348,14 @@ window.addEventListener("touchstart", function (evento) {
     }
 }
 });   
-    function getTouchPos(canvasDom, touchEvent) {
-        var rect = canvasDom.getBoundingClientRect();
+function getTouchPos(canvasDom, touchEvent) {
+    var rect = canvasDom.getBoundingClientRect();
+    return {
+        x: touchEvent.touches[0].clientX - rect.left,
+        y: touchEvent.touches[0].clientY - rect.top
+    };
+}
 
-        return {
-          x: touchEvent.touches[0].clientX - rect.left,
-          y: touchEvent.touches[0].clientY - rect.top
-        };
-      }
 //--->CANVAS SCREEN BUTTONS
 //Botón nivel de dificultad
 const btSelectLevel = new Path2D(); 
@@ -407,22 +407,34 @@ function dentroBtIzquierdo(){
 //Botón seleccionar
 const btSelectPlayer = new Path2D(); 
 btSelectPlayer.rect(canvas.width/2 - 50, canvas.height/2+120, 100, 40);
+//Dibujo del boton (este es especial, porque es animado)
+let effectButtonSelect = "#69744d";
+
+function drawBtSelectPlayer(){
+    contexto.fillStyle= effectButtonSelect;
+    contexto.fill(btSelectPlayer);
+    drawTextDifficulty("SELECT", canvas.width/2 - 34, canvas.height/2 + 147);
+}
 function dentroBtSelect(){
     //---determinación de personaje oponente---
+    effectButtonSelect ="#8a7518";
+    drawBtSelectPlayer();
     randomOponent(); //función aleatoria para determinar oponente
     while(selectPlayer == selectCPU){ //Logra que siempre user !=  cpu
         randomOponent();
     }
-    //---Asignación de personaje---
-    selectPlayerCPU = selectCPU;
-    seleccionarPersonaje();
-    charCPU = charPlayerCpu;
     soundSelectToPlay.play();
-    //---prosecución del pasaje al juego---
-    screenSelectChar = false; //abandona screen select character
-    bgMusicSelectChar.pause(); //detiene bg música de pantalla anterior
-    screenGame = true; //inicia screen game
-    bgMusic.play(); //inicia bg music de juego
+    setTimeout(function(){ 
+        //---Asignación de personaje---
+        selectPlayerCPU = selectCPU;
+        seleccionarPersonaje();
+        charCPU = charPlayerCpu;
+        //---prosecución del pasaje al juego---
+        screenSelectChar = false; //abandona screen select character
+        bgMusicSelectChar.pause(); //detiene bg música de pantalla anterior
+        screenGame = true; //inicia screen game
+        bgMusic.play(); 
+    }, 800); 
 }
 //---Selección aleatoria de oponente
 function randomOponent(){
@@ -615,11 +627,11 @@ function render(){
         contexto.fillStyle = "#69744d";
         contexto.fill(btSelectLeft);
         contexto.fill(btSelectRight);
-        contexto.fill(btSelectPlayer);
+        //contexto.fill(btSelectPlayer);
         contexto.fill(btSelectLevel);
+        drawBtSelectPlayer();
         drawTextSelect("<<", canvas.width - 467, canvas.height/2+30);
         drawTextSelect(">> ", canvas.width -160, canvas.height/2+30);
-        drawTextDifficulty("SELECT", canvas.width/2 - 34, canvas.height/2 + 147);
         drawTextDifficultyTitle("Difficulty  ", canvas.width/2 + 195, canvas.height/2 + 135);
         drawTextDifficulty(difficultyLevelText, canvas.width/2 + 195, canvas.height/2+162);
     }    
