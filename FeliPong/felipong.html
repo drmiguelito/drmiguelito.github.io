@@ -14,10 +14,11 @@
             resize_canvas();
             function resize_canvas(){
             canvas = document.getElementById("pong");
-            if (canvas.width  < window.innerWidth)
+            if (canvas.width  < canvas.innerWidth)
             {
-                canvas.width  = window.innerWidth;
+                canvas.width  = canvas.innerWidth;
             }
+                
         }
     </script>
         <script src="js/felipong.js"></script>
