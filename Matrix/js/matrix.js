@@ -10,6 +10,10 @@ let color1 = "#0aff0a";
 let color2 = "cyan";
 let color3 = "#d4ff6e";
 
+let introWakeUpSong = new Audio();
+introWakeUpSong.src = "audio/matrixWakeUpIntro.mp3";
+introWakeUpSong.play();
+
 //addColorStop(offset, color):
 gradient.addColorStop(0, color1); //red
 //gradient.addColorStop(0.2, "yellow");
