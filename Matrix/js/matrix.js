@@ -12,7 +12,10 @@ let color3 = "#d4ff6e";
 
 let introWakeUpSong = new Audio();
 introWakeUpSong.src = "audio/matrixWakeUpIntro.mp3";
-introWakeUpSong.play();
+window.addEventListener("click", function(){
+    introWakeUpSong.loop = true;
+    introWakeUpSong.play();
+});
 
 //addColorStop(offset, color):
 gradient.addColorStop(0, color1); //red
