@@ -1,0 +1,45 @@
+<!--This is from CodingNepal tutorial-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Piano🎹💥</title>
+        <link rel="stylesheet" href="piano.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=yes"/>
+        <script src="js/piano.js" defer></script>
+    </head>
+    <body> 
+        <div class="wrapper">
+            <header>
+                <h2>PipePiano</h2>
+
+                <div class="column volume-slider">
+                    <span>Volume</span> <input type="range" min="0" max="1" value="0.5" step="any">
+                </div>
+                <div class="column keys-checkbox">
+                    <span>Show Keys</span> <input type="checkbox" checked>
+                </div>
+            </header>
+            <ul class="piano-keys">
+                <li class="key white" data-key="a"> <span>a</span></li><!--1-->
+                <li class="key black" data-key="w"> <span>w</span></li><!--2-->
+                <li class="key white" data-key="s"> <span>s</span></li><!--3-->
+                <li class="key black" data-key="e"> <span>e</span></li><!--4-->
+                <li class="key white" data-key="d"> <span>d</span></li><!--5-->
+                <li class="key white" data-key="f"> <span>f</span></li><!--6-->
+                <li class="key black" data-key="t"> <span>t</span></li><!--7-->
+                <li class="key white" data-key="g"> <span>g</span></li><!--8-->
+                <li class="key black" data-key="y"> <span>y</span></li><!--9-->
+                <li class="key white" data-key="h"> <span>h</span></li><!--10-->
+                <li class="key black" data-key="u"> <span>u</span></li><!--11-->
+                <li class="key white" data-key="j"> <span>j</span></li><!--12-->
+                <li class="key white" data-key="k"> <span>k</span></li><!--13-->
+                <li class="key black" data-key="o"> <span>o</span></li><!--14-->
+                <li class="key white" data-key="l"> <span>l</span></li><!--15-->
+                <li class="key black" data-key="p"> <span>p</span></li><!--16-->
+                <li class="key white" data-key="_"> <span>;</span></li><!--17-->
+            </ul>
+
+        </div>
+    </body>
+</html>
