@@ -1,3 +1,4 @@
+window.addEventListener('load',() => {
 //Tunes
 const pianoKeys = document.querySelectorAll(".piano-keys .key");
 const volumeSlider = document.querySelector(".volume-slider input");
@@ -32,3 +33,4 @@ const pressedKey = (e) => {
 volumeSlider.addEventListener("input", handleVolume);
 keysCheckbox.addEventListener("click", showHideKeys);
 document.addEventListener("keydown", pressedKey);
+});
