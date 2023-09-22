@@ -1,4 +1,4 @@
-//Thank you to Frank Dvorak for this great practice (https://www.youtube.com/@Frankslaboratory)
+//Thanks to Frank Dvorak for this great practice (https://www.youtube.com/@Frankslaboratory)
 const canvas = document.getElementById("canvas1");
 const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
