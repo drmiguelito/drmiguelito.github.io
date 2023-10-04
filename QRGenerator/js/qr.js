@@ -12,7 +12,9 @@ document.addEventListener("keydown", (event)=>{
     }
 });
 //>>Click
+var buttonSaveOn = false;
 qrImage.addEventListener("click", ()=>{
+    saveButtonExistence = true;
     var buttonSave = document.createElement('button');
     buttonSave.type = 'button';
     buttonSave.innerHTML = 'Save QR';
@@ -22,6 +24,12 @@ qrImage.addEventListener("click", ()=>{
     btSave.addEventListener("click", openSaveAsDialog);
     btSave.addEventListener("mouseout", ()=>{
         btSave.parentNode.removeChild(btSave);
+    });
+    qrImage.addEventListener("touchmove", ()=>{
+        if(saveButtonExistence){
+            btSave.parentNode.removeChild(btSave);
+            saveButtonExistence = false;
+        }
     });
 }, false);
 //---QR generator
