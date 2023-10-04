@@ -33,6 +33,11 @@ document.addEventListener("touchmove", ()=>{
         btSave.parentNode.removeChild(btSave);
     }
 });
+document.addEventListener("touchend", ()=>{
+    if(document.getElementById("btSave")){
+        btSave.parentNode.removeChild(btSave);
+    }
+});
 //---QR generator
 function generateQR(){
     if(qrText.value.length > 0){ //evita que se ejecute si el textbox está vacío
