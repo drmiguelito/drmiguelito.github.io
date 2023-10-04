@@ -28,7 +28,7 @@ qrImage.addEventListener("click", ()=>{
         });
     }
 });
-qrImage.addEventListener("touchmove", ()=>{
+document.addEventListener("touchmove", ()=>{
     if(document.getElementById("btSave")){
         btSave.parentNode.removeChild(btSave);
     }
