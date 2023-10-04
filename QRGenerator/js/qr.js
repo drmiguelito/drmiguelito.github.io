@@ -49,6 +49,9 @@ function generateQR(){
             qrText.classList.remove('error');
         }, 500)
     }
+    if(!document.getElementById("btSave")){
+        btSave.parentNode.removeChild(btSave)
+    }
 }
 //---Save As QR image
 function openSaveAsDialog(){
