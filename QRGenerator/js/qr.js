@@ -12,26 +12,27 @@ document.addEventListener("keydown", (event)=>{
     }
 });
 //>>Click
-var buttonSaveOn = false;
 qrImage.addEventListener("click", ()=>{
-    saveButtonExistence = true;
-    var buttonSave = document.createElement('button');
-    buttonSave.type = 'button';
-    buttonSave.innerHTML = 'Save QR';
-    buttonSave.id = 'btSave';
-    imgBox.appendChild(buttonSave);
-    var btSave = document.getElementById("btSave");
-    btSave.addEventListener("click", openSaveAsDialog);
-    btSave.addEventListener("mouseout", ()=>{
-        btSave.parentNode.removeChild(btSave);
-    });
-    qrImage.addEventListener("touchmove", ()=>{
-        if(saveButtonExistence){
+    if(!document.getElementById("btSave")){
+        var buttonSave = document.createElement('button');
+        buttonSave.type = 'button';
+        buttonSave.innerHTML = 'Save QR';
+        buttonSave.id = 'btSave';
+        imgBox.appendChild(buttonSave);
+    }
+    else{
+        var btSave = document.getElementById("btSave");
+        btSave.addEventListener("click", openSaveAsDialog);
+        btSave.addEventListener("mouseout", ()=>{
             btSave.parentNode.removeChild(btSave);
-            saveButtonExistence = false;
-        }
-    });
-}, false);
+        });
+    }
+});
+qrImage.addEventListener("touchmove", ()=>{
+    if(document.getElementById("btSave")){
+        btSave.parentNode.removeChild(btSave);
+    }
+});
 //---QR generator
 function generateQR(){
     if(qrText.value.length > 0){ //evita que se ejecute si el textbox está vacío
