@@ -13,31 +13,29 @@ document.addEventListener("keydown", (event)=>{
 });
 //>>Click
 qrImage.addEventListener("click", ()=>{
-    if(!document.getElementById("btSave")){
+    if(document.getElementById("btSave") === null){
         var buttonSave = document.createElement('button');
         buttonSave.type = 'button';
         buttonSave.innerHTML = 'Save QR';
         buttonSave.id = 'btSave';
         imgBox.appendChild(buttonSave);
-    }
-    else{
         var btSave = document.getElementById("btSave");
-        btSave.addEventListener("click", openSaveAsDialog);
+    }
+    if(document.getElementById("btSave") !== null){
+        btSave.addEventListener("click", openSaveAsDialog);  
         btSave.addEventListener("mouseout", ()=>{
             btSave.parentNode.removeChild(btSave);
         });
+        if(document.getElementById("btSave") !== null){
+            document.addEventListener("touchstart", (event)=>{
+                var clickInsideSaveButton = btSave.contains(event.target);
+                if(!clickInsideSaveButton){
+                    btSave.parentNode.removeChild(btSave);
+                } 
+            });
+        }
     }
-});
-document.addEventListener("touchmove", ()=>{
-    if(document.getElementById("btSave")){
-        btSave.parentNode.removeChild(btSave);
-    }
-});
-/*document.addEventListener("touchend", ()=>{
-    if(document.getElementById("btSave")){
-        btSave.parentNode.removeChild(btSave);
-    }
-});*/
+});  
 //---QR generator
 function generateQR(){
     if(qrText.value.length > 0){ //evita que se ejecute si el textbox está vacío
@@ -48,9 +46,6 @@ function generateQR(){
         setTimeout(()=>{
             qrText.classList.remove('error');
         }, 500)
-    }
-    if(!document.getElementById("btSave")){
-        btSave.parentNode.removeChild(btSave)
     }
 }
 //---Save As QR image
@@ -72,4 +67,4 @@ function openSaveAsDialog(){
 function qrTextFocus(){
     qrText.focus();
 }
-setTimeout(qrTextFocus, 2500);   
+setTimeout(qrTextFocus, 2500);
