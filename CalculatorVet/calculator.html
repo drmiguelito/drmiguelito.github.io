@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Calculator Vet 📱💥</title>
+        <link rel="stylesheet" href="calculatorvet.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=yes"/>
+    </head>
+    <body> 
+        <div class="container">
+            <div class="calculator">
+                <form>
+                    <!--Row 0 (mode)-->
+                    <div class="mode">
+                        <input type="text" name="mode" id="mode">
+                    </div>                   
+                    <!--Row 0 (display)-->
+                    <div class="display">
+                        <input type="text" name="display" id="display">
+                    </div>
+                    <!--Row 1-->
+                    <div>
+                        <input type="button" value="AC" class="operator" onclick="restart()"> <!--column 1-->
+                        <input type="button" value="DE" class="operator" onclick="backspace()"> <!--column 2-->
+                        <input type="button" value="."  class="operator" onclick="display.value +='.'"> <!--column 3-->
+                        <input type="button" value="/"  class="operator" onclick="display.value +='/'"> <!--column 4-->
+                    </div>
+                    <!--Row 2-->
+                    <div>
+                        <input type="button" value="7" onclick="display.value +='7'"> 
+                        <input type="button" value="8" onclick="display.value +='8'"> 
+                        <input type="button" value="9" onclick="display.value +='9'"> 
+                        <input type="button" value="*" class="operator" onclick="display.value +='*'"> 
+                    </div>
+                    <!--Row 3-->
+                    <div>
+                        <input type="button" value="4" onclick="display.value +='4'"> 
+                        <input type="button" value="5" onclick="display.value +='5'"> 
+                        <input type="button" value="6" onclick="display.value +='6'"> 
+                        <input type="button" value="-" class="operator" onclick="display.value +='-'"> 
+                    </div>
+                    <!--Row 4-->
+                    <div>
+                        <input type="button" value="1" onclick="display.value +='1'"> 
+                        <input type="button" value="2" onclick="display.value +='2'"> 
+                        <input type="button" value="3" onclick="display.value +='3'"> 
+                        <input type="button" value="+" class="operator" onclick="display.value +='='"> 
+                    </div>      
+                    <!--Row 5 (3 buttons)-->
+                    <div>
+                        <input type="button" value="00" onclick="display.value +='00'"> 
+                        <input type="button" value="0" onclick="display.value +='0'"> 
+                        <input type="button" value="=" class="equalOperator operator"
+                        onclick="calculate()"> 
+                    </div>   
+                    <!--Row 6 (mode options)-->
+                    <div>
+                        <input type="button" value="p%" class="modeStyle" onclick="percentage()">
+                        <input type="button" value="vet" class="modeStyle" onclick="veterinary()">
+                        <input type="button" value="" class="modeStyle" onclick="display.value =''">
+                        <input type="button" value="🏇" class="modeStyle" onclick="racing()">
+                    </div>                
+                </form>
+            </div>
+        </div>   
+        <script src="js/calculatorvet.js"></script>
+    </body>
+</html>
