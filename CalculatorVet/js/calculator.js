@@ -174,6 +174,7 @@ function calculate(){
             }
         }
     }
+}
 //---Mode functions---
 function percentage(){
     step = 0;
