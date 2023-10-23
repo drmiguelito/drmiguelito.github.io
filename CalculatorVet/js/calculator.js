@@ -85,93 +85,95 @@ function restart(){
     display.value = "";
 }
 function calculate(){
-    if(modeOption===0){
+    if(display.value !=="")
+    {
+        if(modeOption===0){
         mode.value = display.value + " =";
         display.value = eval(display.value);
+        }
+        if(modeOption===1){
+            //Fallas en: manejo de números negativos
+            console.log("percentage step: " + step);
+            if(step === 3){
+                mode.value = "";
+                modeOption = 0;
+                value1, value2 = "";
+                //step = 0;
+                console.log("modeOption RESET: " + modeOption);
+            }
+            if(step === 2 && display.value !== ""){
+                value2 = display.value;
+                mode.value = "🅿️   The result of " + value2 + "% of " + value1 + " is:";
+                var result = (Number(value1) * Number(value2)) / 100;
+                display.value = result;
+                step++;
+            }
+            if(step === 1 && display.value !== ""){
+                value1 = display.value;
+                mode.value = "🅿️   Total entered: " + value1 + ". PUT %";
+                display.value = "";
+                step++;
+            }
+            if(step === 0){
+                mode.value = "🅿️   PUT TOTAL";
+                step++;
+            }
+        }
+        if(modeOption===2){
+            console.log("percentage step: " + step);
+            if(step === 3){
+                mode.value = "";
+                modeOption = 0;
+                value1, value2 = "";
+                //step = 0;
+                console.log("modeOption RESET: " + modeOption);
+            }
+            if(step === 2 && display.value !== ""){
+                value2 = display.value;
+                mode.value = "🅿️   The result of " + value2 + "% of " + value1 + " is:";
+                var result = (Number(value1) * Number(value2)) / 100;
+                display.value = result;
+                step++;
+            }
+            if(step === 1 && display.value !== ""){
+                value1 = display.value;
+                mode.value = "🅿️   Total entered: " + value1 + ". PUT %";
+                display.value = "";
+                step++;
+            }
+            if(step === 0){
+                mode.value = "🩺   PUT TOTAL";
+                step++;
+            }
+        }
+        if(modeOption===3){
+            console.log("racing step: " + step);
+            if(step === 3){
+                mode.value = "";
+                modeOption = 0;
+                value1, value2 = "";
+                //step = 0;
+                console.log("modeOption RESET: " + modeOption);
+            }
+            if(step === 2 && display.value !== ""){
+                value2 = display.value;
+                mode.value = "🐴   The speed is (km/h): ";
+                var result = (Number(value1) / Number(value2)) *3.6;
+                display.value = Math.round(result);
+                step++;
+            }
+            if(step === 1 && display.value !== ""){
+                value1 = display.value;
+                mode.value = "🐴   Dist. entered: " + value1 + " m. PUT SECONDS";
+                display.value = "";
+                step++;
+            }
+            if(step === 0){
+                mode.value = "🐴   PUT DISTANCE (METERS)";
+                step++;
+            }
+        }
     }
-    if(modeOption===1){
-        //Fallas en: manejo de números negativos
-        console.log("percentage step: " + step);
-        if(step === 3){
-            mode.value = "";
-            modeOption = 0;
-            value1, value2 = "";
-            //step = 0;
-            console.log("modeOption RESET: " + modeOption);
-        }
-        if(step === 2 && display.value !== ""){
-            value2 = display.value;
-            mode.value = "🅿️   The result of " + value2 + "% of " + value1 + " is:";
-            var result = (Number(value1) * Number(value2)) / 100;
-            display.value = result;
-            step++;
-        }
-        if(step === 1 && display.value !== ""){
-            value1 = display.value;
-            mode.value = "🅿️   Total entered: " + value1 + ". PUT %";
-            display.value = "";
-            step++;
-        }
-        if(step === 0){
-            mode.value = "🅿️   PUT TOTAL";
-            step++;
-        }
-    }
-    if(modeOption===2){
-        console.log("percentage step: " + step);
-        if(step === 3){
-            mode.value = "";
-            modeOption = 0;
-            value1, value2 = "";
-            //step = 0;
-            console.log("modeOption RESET: " + modeOption);
-        }
-        if(step === 2 && display.value !== ""){
-            value2 = display.value;
-            mode.value = "🅿️   The result of " + value2 + "% of " + value1 + " is:";
-            var result = (Number(value1) * Number(value2)) / 100;
-            display.value = result;
-            step++;
-        }
-        if(step === 1 && display.value !== ""){
-            value1 = display.value;
-            mode.value = "🅿️   Total entered: " + value1 + ". PUT %";
-            display.value = "";
-            step++;
-        }
-        if(step === 0){
-            mode.value = "🩺   PUT TOTAL";
-            step++;
-        }
-    }
-    if(modeOption===3){
-        console.log("racing step: " + step);
-        if(step === 3){
-            mode.value = "";
-            modeOption = 0;
-            value1, value2 = "";
-            //step = 0;
-            console.log("modeOption RESET: " + modeOption);
-        }
-        if(step === 2 && display.value !== ""){
-            value2 = display.value;
-            mode.value = "🐴   The speed is (km/h): ";
-            var result = (Number(value1) / Number(value2)) *3.6;
-            display.value = Math.round(result);
-            step++;
-        }
-        if(step === 1 && display.value !== ""){
-            value1 = display.value;
-            mode.value = "🐴   Dist. entered: " + value1 + " m. PUT SECONDS";
-            display.value = "";
-            step++;
-        }
-        if(step === 0){
-            mode.value = "🐴   PUT DISTANCE (METERS)";
-            step++;
-        }
-    }
-}
 //---Mode functions---
 function percentage(){
     step = 0;
