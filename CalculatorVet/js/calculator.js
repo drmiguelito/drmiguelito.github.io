@@ -16,65 +16,63 @@ function keyPressed(event){
     if(event.key === "Enter"){
         calculate();
     }
-    if(enterData){
-        switch(event.key){
-            case "0":
-                display.value += "0";
-                break;
-            case "1":
-                display.value += "1";
-                break;
-            case "2":
-                display.value += "2";
-                break;
-            case "3":
-                display.value += "3";
-                break;
-            case "4":
-                display.value += "4";
-                break;
-            case "5":
-                display.value += "5";
-                break;
-            case "6":
-                display.value += "6";
-                break;
-            case "7":
-                display.value += "7";
-                break;
-            case "8":
-                display.value += "8";
-                break;
-            case "9":
-                display.value += "9";
-                break;
-            case ".":
-                display.value += ".";
-                break;
-            case "+":
-                display.value += "+";
-                break;
-            case "-":
-                display.value += "-";
-                break;
-            case "*":
-                display.value += "*";
-                break;
-            case "/":
-                display.value += "/";
-                break;
-            case "Backspace":
-                backspace();
-                break;
-            case "Delete":
-                restart();
-                break;
-            case "p":
-                percentage();
+    switch(event.key){
+        case "0":
+            display.value += "0";
             break;
-            case "r":
-                racing();
-        }
+        case "1":
+            display.value += "1";
+            break;
+        case "2":
+            display.value += "2";
+            break;
+        case "3":
+            display.value += "3";
+            break;
+        case "4":
+            display.value += "4";
+            break;
+        case "5":
+            display.value += "5";
+            break;
+        case "6":
+            display.value += "6";
+            break;
+        case "7":
+            display.value += "7";
+            break;
+        case "8":
+            display.value += "8";
+            break;
+        case "9":
+            display.value += "9";
+            break;
+        case ".":
+            display.value += ".";
+            break;
+        case "+":
+            display.value += "+";
+            break;
+        case "-":
+            display.value += "-";
+            break;
+        case "*":
+            display.value += "*";
+            break;
+        case "/":
+            display.value += "/";
+            break;
+        case "Backspace":
+            backspace();
+            break;
+        case "Delete":
+            restart();
+            break;
+        case "p":
+            percentage();
+            break;
+        case "r":
+            racing();
     }
 }
 function backspace(){
@@ -85,11 +83,13 @@ function restart(){
     display.value = "";
 }
 function calculate(){
+    if(display.value ==="undefined"){
+        display.value = "";
+    }
     if(modeOption===0){
         mode.value = display.value + " =";
         display.value = eval(display.value);
         }
-    if(display.value !=="") {
         if(modeOption===1){
             //Fallas en: manejo de números negativos
             console.log("percentage step: " + step);
@@ -172,7 +172,6 @@ function calculate(){
                 step++;
             }
         }
-    }
 }
 //---Mode functions---
 function percentage(){
