@@ -85,12 +85,11 @@ function restart(){
     display.value = "";
 }
 function calculate(){
-    if(display.value !=="")
-    {
-        if(modeOption===0){
+    if(modeOption===0){
         mode.value = display.value + " =";
         display.value = eval(display.value);
         }
+    if(display.value !=="") {
         if(modeOption===1){
             //Fallas en: manejo de números negativos
             console.log("percentage step: " + step);
