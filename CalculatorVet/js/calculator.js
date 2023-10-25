@@ -100,6 +100,7 @@ function calculate(){
     }
     //Veterinary
     if(modeOption===2){
+        modeVeterinaryDose();
     }
     //Racing
     if(modeOption===4){
@@ -159,7 +160,7 @@ function modeRacing(){
     if(display.value !== ""){
         if(step === 2){
             value2 = display.value;
-            mode.value = "🐴   The speed of " + value1 + "m in " + value2 + "s is (km/h): ";
+            mode.value = "🏇The speed over " + value1 + "m in " + value2 + "s is (km/h): ";
             var result = (Number(value1) / Number(value2)) *3.6;
             display.value = Math.round(result);
             step++;
@@ -169,24 +170,22 @@ function modeRacing(){
     if(display.value !== ""){
         if(step === 1){
             value1 = display.value;
-            mode.value = "🐴 Distance: " + value1 + " m. Put SECONDS";
+            mode.value = "🏇 Distance: " + value1 + " m. Put SECONDS";
             display.value = ""; 
             step++;
         }
     }
     //Step 0: first value (meters)
     if(step === 0){
-        mode.value = "🐴KM/H using meters and seconds";
+        mode.value = "🏇(KM/H using meters and seconds)";
         setTimeout(()=>{
-            mode.value = "🐴 Put DISTANCE (meters)";
-        }, 2000);
-        
+            mode.value = "🏇 Put DISTANCE (meters)";
+        }, 2000);       
         step++;
     }
-    
 }
 //--Veterinary (fluid therapy)
-function veterinary(){
+function modeVeterinaryDose(){
     if(modeOption === 2){
         modeOption = 0;
         mode.value = "";
