@@ -37,17 +37,17 @@ form .mode{
     display: flex;
 }
 form .mode input{
-    height: 20px;
+    height: 22px;
+    border-radius: 1px;
     justify-content: flex-end;
     margin-bottom: 5px;
     text-align: left;
     color: #0eff;
     flex: 1;
-    font-size: 18px;
     box-shadow: none;
 }
 form .mode input#mode{
-    font-size: 18px;
+    font-size: 17px;
 }
 form .display{
     display: flex;
