@@ -59,7 +59,7 @@ function keyPressed(event){
             break;
         case "+":
             display.value += "+";
-            break;
+            brek;
         case "-":
             display.value += "-";
             break;
@@ -79,7 +79,7 @@ function keyPressed(event){
             modePercentage();
             break;
         case "r":
-            racing();
+            modeRacing();
     }
 }
 function backspace(){ 
@@ -94,42 +94,20 @@ function calculate(){
         mode.value = display.value + " =";
         display.value = eval(display.value);
     }
-    //--Porcentaje
+    //Percentage
     if(modeOption===1){
         modePercentage();
     }
+    //Veterinary
     if(modeOption===2){
-        console.log("veterinary step: " + step);
     }
-    //--Racing
+    //Racing
     if(modeOption===4){
-        console.log("racing step: " + step);
-        if(step === 3){
-            mode.value = "";
-            modeOption = 0;
-            value1, value2 = "";
-            console.log("modeOption RESET: " + modeOption);
-        }
-        if(step === 2 && display.value !== ""){
-            value2 = display.value;
-            mode.value = "🐴   The speed is (km/h): ";
-            var result = (Number(value1) / Number(value2)) *3.6;
-            display.value = Math.round(result);
-            step++;
-        }
-        if(step === 1 && display.value !== ""){
-            value1 = display.value;
-            mode.value = "🐴   Dist. entered: " + value1 + " m. PUT SECONDS";
-            display.value = "";
-            step++;
-        }
-        if(step === 0){
-            mode.value = "🐴   PUT DISTANCE (METERS)";
-            step++;
-        }
+        modeRacing();
     }
 }
 //---Mode functions---
+//--Percentage
 function modePercentage(){
     console.log("percentage step: " + step);
     //Paso 3: clear values
@@ -154,7 +132,7 @@ function modePercentage(){
     if(step === 1){
         if(display.value !== ""){
             value1 = display.value;
-            mode.value = "Total entered: " + value1 + ". PUT %";
+            mode.value = "🅿️ Total entered: " + value1 + ". PUT %";
             display.value = "";
             step++;
             console.log("percentage step--> " + step);
@@ -162,13 +140,53 @@ function modePercentage(){
     }
     //Step 0: first value
     if(step === 0){
-        mode.value = "PUT TOTAL";
+        mode.value = "🅿️ PUT TOTAL";
         step++;
         console.log("percentage step--> " + step);
     }
 }
+//--Racing (km/h)
+function modeRacing(){
+    //Step 3: clear
+    console.log("racing step: " + step);
+    if(step === 3){
+        mode.value = "";
+        modeOption = 0;
+        value1, value2 = "";
+        console.log("modeORacingOption RESET: " + modeOption);
+    }
+    //Step 2: formula
+    if(display.value !== ""){
+        if(step === 2){
+            value2 = display.value;
+            mode.value = "🐴   The speed of " + value1 + "m in " + value2 + "s is (km/h): ";
+            var result = (Number(value1) / Number(value2)) *3.6;
+            display.value = Math.round(result);
+            step++;
+        }
+    }
+    //Step 1: second value (seconds)
+    if(display.value !== ""){
+        if(step === 1){
+            value1 = display.value;
+            mode.value = "🐴 Distance: " + value1 + " m. Put SECONDS";
+            display.value = ""; 
+            step++;
+        }
+    }
+    //Step 0: first value (meters)
+    if(step === 0){
+        mode.value = "🐴KM/H using meters and seconds";
+        setTimeout(()=>{
+            mode.value = "🐴 Put DISTANCE (meters)";
+        }, 2000);
+        
+        step++;
+    }
+    
+}
+//--Veterinary (fluid therapy)
 function veterinary(){
-    step = 0;
     if(modeOption === 2){
         modeOption = 0;
         mode.value = "";
@@ -180,10 +198,7 @@ function veterinary(){
     }
     console.log("modeOption " + modeOption + " (percentage)");
 }
-function racing(){
-    step = 0;
-    
-}
+
 
 //--Select mode
 function selectMode(modeID){
