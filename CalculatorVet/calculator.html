@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Calculator Vet 📱💥</title>
-        <link rel="stylesheet" href="calculator.css">
+        <link rel="stylesheet" href="calculatorvet.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=yes"/>
     </head>
     <body> 
@@ -44,7 +44,7 @@
                         <input type="button" value="1" onclick="display.value +='1'"> 
                         <input type="button" value="2" onclick="display.value +='2'"> 
                         <input type="button" value="3" onclick="display.value +='3'"> 
-                        <input type="button" value="+" class="operator" onclick="display.value +='+'"> 
+                        <input type="button" value="+" class="operator" onclick="display.value +='='"> 
                     </div>      
                     <!--Row 5 (3 buttons)-->
                     <div>
@@ -56,13 +56,13 @@
                     <!--Row 6 (mode options)-->
                     <div>
                         <input type="button" value="p%" id="mode1" class="modeStyle" onclick="selectMode(this.id)">  
-                        <input type="button" value="vetF" class="modeStyle" onclick="veterinary(this.id)">
-                        <input type="button" value="vetD" class="modeStyle" onclick="display.value =''">
+                        <input type="button" value="vetD" id="mode2" class="modeStyle" onclick="selectMode(this.id)">
+                        <input type="button" value="vetF" class="modeStyle" onclick="display.value =''">
                         <input type="button" value="🏇" id="mode4" class="modeStyle" onclick="selectMode(this.id)">
                     </div>                
                 </form>
             </div>
         </div>   
-        <script src="js/calculator.js"></script>
+        <script src="calculatorvet.js"></script>
     </body>
 </html>
