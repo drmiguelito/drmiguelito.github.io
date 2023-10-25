@@ -55,10 +55,10 @@
                     </div>   
                     <!--Row 6 (mode options)-->
                     <div>
-                        <input type="button" value="p%" class="modeStyle" onclick="percentage()">
-                        <input type="button" value="vet" class="modeStyle" onclick="veterinary()">
-                        <input type="button" value="Pi" class="modeStyle" onclick="display.value ='3.14159265'">
-                        <input type="button" value="🏇" class="modeStyle" onclick="racing()">
+                        <input type="button" value="p%" id="mode1" class="modeStyle" onclick="selectMode(this.id)">  
+                        <input type="button" value="vetF" class="modeStyle" onclick="veterinary(this.id)">
+                        <input type="button" value="vetD" class="modeStyle" onclick="display.value =''">
+                        <input type="button" value="🏇" id="mode4" class="modeStyle" onclick="selectMode(this.id)">
                     </div>                
                 </form>
             </div>
