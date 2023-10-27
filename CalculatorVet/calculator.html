@@ -44,7 +44,7 @@
                         <input type="button" value="1" onclick="display.value +='1'"> 
                         <input type="button" value="2" onclick="display.value +='2'"> 
                         <input type="button" value="3" onclick="display.value +='3'"> 
-                        <input type="button" value="+" class="operator" onclick="display.value +='='"> 
+                        <input type="button" value="+" class="operator" onclick="display.value +='+'"> 
                     </div>      
                     <!--Row 5 (3 buttons)-->
                     <div>
@@ -56,10 +56,18 @@
                     <!--Row 6 (mode options)-->
                     <div>
                         <input type="button" value="p%" id="mode1" class="modeStyle" onclick="selectMode(this.id)">  
-                        <input type="button" value="vetD" id="mode2" class="modeStyle" onclick="selectMode(this.id)">
-                        <input type="button" value="vetF" class="modeStyle" onclick="display.value =''">
+                        <input type="button" value="+p%" id="mode2" class="modeStyle" onclick="selectMode(this.id)">
+
+                        <input type="button" value="⇆" class="modeStyle" onclick="display.value =''">
                         <input type="button" value="🏇" id="mode4" class="modeStyle" onclick="selectMode(this.id)">
-                    </div>                
+                    </div>      
+                    <!--Row 7 (Other options)-->
+                    <div>
+                        <input type="button" value="√" id="squareRoot" class="operator" onclick="selectMode(this.id)"> 
+                        <input type="button" value="x^2" id="squared" class="operator" onclick="selectMode(this.id)"> 
+                        <input type="button" value="ln" id="ln" class="operator" onclick="selectMode(this.id)"> 
+                        <input type="button" value="CIRC" id="circ" class="operator" onclick="selectMode(this.id)"> 
+                    </div> 
                 </form>
             </div>
         </div>   
