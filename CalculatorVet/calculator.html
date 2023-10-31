@@ -55,11 +55,44 @@
                     </div>   
                     <!--Row 6 (mode options)-->
                     <div>
-                        <input type="button" value="p%" id="mode1" class="modeStyle" onclick="selectMode(this.id)">  
-                        <input type="button" value="+p%" id="mode2" class="modeStyle" onclick="selectMode(this.id)">
-
-                        <input type="button" value="⇆" class="modeStyle" onclick="display.value =''">
-                        <input type="button" value="🏇" id="mode4" class="modeStyle" onclick="selectMode(this.id)">
+                        <ul class="conversorMenu">
+                            <li>
+                                <input type="button" value="u⇆" id="modeConversor" class="modeStyle" onclick="selectMode(this.id)">
+                                <ul>
+                                    <li>
+                                        <input type="button" value="⚖️" class="modeStyle">
+                                        <ul>
+                                            <li><input type="button" value="g" id="convGs" class="modeStyle" onclick="selectMode(this.id)"></li>
+                                            <li><input type="button" value="Kg" id="convKg" class="modeStyle" onclick="selectMode(this.id)"></li>
+                                            <li><input type="button" value="Oz" id="convOz" class="modeStyle" onclick="selectMode(this.id)"></li>
+                                            <li><input type="button" value="Lb" id="convLb" class="modeStyle" onclick="selectMode(this.id)"></li>
+                                            <li><input type="button" value="St" id="convSt" class="modeStyle" onclick="selectMode(this.id)"></li>
+                                        </ul>                
+                                    </li>
+                                    <li>
+                                        <input type="button" value="🌡️" class="modeStyle">
+                                        <ul>
+                                            <li><input type="button" value="°C" id="convC" class="modeStyle" onclick="selectMode(this.id)"></li>
+                                            <li><input type="button" value="°F" id="convF" class="modeStyle" onclick="selectMode(this.id)"></li>
+                                            <li><input type="button" value="K" id="convK" class="modeStyle" onclick="selectMode(this.id)"></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <input type="button" value="📏" class="modeStyle" onclick="display.value =''">
+                                        <ul>
+                                            <li><input type="button" value="m" class="modeStyle" onclick="display.value =''"></li>
+                                            <li><input type="button" value="Km" alt="meters" class="modeStyle" onclick="display.value =''"></li>
+                                            <li><input type="button" value="Mi" alt="furlogs" class="modeStyle" onclick="display.value =''"></li>
+                                            <li><input type="button" value="Fur" alt="miles" class="modeStyle" onclick="display.value =''"></li>
+                                            <li><input type="button" value="Yds" class="modeStyle" onclick="display.value =''"></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <input type="button" value="p%" id="mode1" class="modeStyle" onclick="selectMode(this.id)">
+                            <input type="button" value="+p%" id="mode2" class="modeStyle" onclick="selectMode(this.id)">
+                            <input type="button" value="🏇" id="mode4" class="modeStyle" onclick="selectMode(this.id)">
+                        </ul>
                     </div>      
                     <!--Row 7 (Other options)-->
                     <div>
