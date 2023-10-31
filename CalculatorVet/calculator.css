@@ -67,8 +67,38 @@ form input.operator{
     color: #33ffd8;
 }
 form input#circ{
-    font-size: 15px;
+    font-size: 15px;   
 }
 form input.modeStyle{
     background-color: darkslateblue;
+}
+ul, ol{
+    list-style: none;
+}
+.conversorMenu li{
+    display: inline-block;
+}
+.conversorMenu > li{
+    float: left;
+}
+.conversorMenu li ul{
+    display: none;
+    position: absolute;
+}
+.conversorMenu li:hover > ul{
+    display: inline-block;
+}
+.conversorMenu li ul li input:hover{
+    background-color: #2f8333;
+    display: inline-block;
+}
+.conversorMenu li ul li{
+    position: relative;
+}
+.conversorMenu li ul li ul{
+    right: 0px;
+}
+.conversorMenu li ul li ul li{
+    display: block;
+    top: -400px;
 }
