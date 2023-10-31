@@ -14,6 +14,7 @@ document.addEventListener("keydown", keyPressed);
 var modeOption = 0;
 var step = 0;
 var value1, value2, value3 =  "";
+var unit = "";
 
 //>>Keyboard
 function keyPressed(event){
@@ -98,7 +99,9 @@ function calculate(){
     //Regular calculations (+, -, /, *)
     if(modeOption===0){
         mode.value = display.value + " =";
-        display.value = eval(display.value);
+        if(display.value !== ""){
+            display.value = eval(display.value);
+        }
     }
     //Mode percentage (mode1)
     if(modeOption===1){
@@ -151,13 +154,40 @@ function selectMode(modeID){
         }
         console.log("modeOption " + modeOption + " (racing)");
     }
+    //Unit conversor
+    if(display.value !== ""){
+        value1 = display.value;
+        console.log(modeID);
+        switch(modeID){
+            case "modeConversor":
+                mode.value = "Convert units: choose initial unit";
+                break;
+            case "convGs":
+                convGs();
+                break;
+            case "convKg":
+                convKg();
+                break;
+            case "convOz":
+                convOz();
+                break;
+            case "convLb":
+                convLb();
+                break;
+            case "convSt":
+                convSt();
+                break;
+        } 
+    }else{
+        mode.value = "Enter a number and choose unit";
+    }
     //Other calculations
     //Square root:
     if(modeID ==="squareRoot"){
         value1 = display.value;
         result = Math.sqrt(Number(value1));
         mode.value = "√" + value1 + " =";
-        display.value = result;
+        display.value = result.toFixed(2);
         value1 = 0; //clear
     }
     //Squared:
@@ -165,14 +195,14 @@ function selectMode(modeID){
         value1 = display.value;
         result = Number(value1)*Number(value1);
         mode.value = value1 + "^2 =";
-        display.value = result;
+        display.value = result.toFixed(2);
         value1 = 0; //clear
     }
     if(modeID ==="ln"){
         value1 = display.value;
         result = Math.log(Number(value1));
         mode.value = "ln(" + value1 + ") =";
-        display.value = result;
+        display.value = result.toFixed(2);
         value1 = 0; //clear
     }
     if(modeID ==="circ"){
@@ -180,7 +210,7 @@ function selectMode(modeID){
             value1 = display.value;
             result = Math.PI * Number(value1) * Number(value1);
             mode.value = "The cimcurference (r = " + value1 + ") is:";
-            display.value = result;
+            display.value = result.toFixed(2);
             value1 = 0; //clear
         } else {
             mode.value = "Enter radius and press 'circ' button"
@@ -271,14 +301,6 @@ function clickPressed(){
 //-->Add percentage (+p% button)
 
 
-
-
-
-
-
-
-    
-
 //---Mode functions---
 
 
@@ -327,7 +349,6 @@ function modeVeterinaryDose(){
         mode.value = "";
         modeOption = 0;
         value1, value2 = "";
-
         console.log("modeORacingOption RESET: " + modeOption);
     }
     //Step 2: formula
@@ -359,3 +380,190 @@ function modeVeterinaryDose(){
     }
     console.log("modeOption " + modeOption + " (percentage)");
 }
+//---Conversion functions----
+//-->Grams
+function convGs(){
+    if(unit !==""){
+        switch(unit){
+            case "kg": //1
+                result = Number(value1) * 1000;
+                mode.value = value1 + " kg to g:"
+                display.value = result;
+                unit = "";
+                break;
+            case "lb": //2: 1 pound equals 453.6 grams
+                result = Number(value1) * 453.592;
+                mode.value = value1 + " lb to g:"
+                display.value = result;
+                unit = "";
+                break;
+            case "st": //3: 1 stone equals 6,350.29 grams
+                result = Number(value1) * 6350.29;
+                mode.value = value1 + " st to g:"
+                display.value = result;
+                unit = "";
+                break;
+            case "oz": //4: 1 ounce equals to 28.35 grams
+                result = Number(value1) * 28.35;
+                mode.value = value1 + " oz to g:"
+                display.value = result;
+                unit = "";
+                break;
+            default:
+                console.log("Unit type not found");
+                break;
+        }
+    } else {
+        unit = "g";
+        mode.value = value1 + " gs" + ". Choose unit destination";
+    }
+}
+//-->Kilograms
+function convKg(){
+    if(unit !==""){
+        switch(unit){
+            case "g": //1
+                result = Number(value1) / 1000;
+                mode.value = value1 + "g to kg:"
+                display.value = result;
+                unit = "";
+                break;
+            case "lb": //2: 1 pound is 0.4536 kg
+                result = Number(value1) * 0.4536;
+                mode.value = value1 + "lb to kg:"
+                display.value = result.toFixed(4);
+                unit = "";
+                break;
+            case "st": //3: 1 stone is 0.1574 kg
+                result = Number(value1) / 0.1574;
+                mode.value = value1 + "st to kg:"
+                display.value = result.toFixed(4);
+                unit = "";
+                break;
+            case "oz": //4: 1 ounce is 0.02834 kg
+                result = Number(value1) * 0.02834;
+                mode.value = value1 + " oz to kg:"
+                display.value = result;
+                unit = "";
+                break;
+            default:
+                console.log("Unit type not found");
+                break;
+        }
+    } else {
+        unit = "kg";
+        mode.value = value1 + " kg" + ". Choose unit destination";
+    }
+}
+//-->Pounds
+function convLb(){ //<-- Pounds
+    if(unit !==""){
+        switch(unit){
+            case "g": //1: 1 gram is 0.002204 lbs
+                result = (Number(value1) / 1000) * 2.204;
+                mode.value = value1 + " g to lb:"
+                display.value = result.toFixed(6);
+                unit = "";
+                break;
+            case "kg": //2: 1 kg is 2.204 lbs
+                result = Number(value1) * 2.204;
+                mode.value = value1 + " kg to lb:"
+                display.value = result.toFixed(2);
+                unit = "";
+                break;
+            case "st": //3: 1 st is 14 lbs
+                result = Number(value1) * 14;
+                mode.value = value1 + " st to lb:"
+                display.value = result.toFixed(2);
+                unit = "";
+                break;
+            case "oz": //4: 1 oz is 0.0625 lbs
+                result = Number(value1) * 0.0625;
+                mode.value = value1 + " oz to lb:"
+                display.value = result.toFixed(2);
+                unit = "";
+                break;
+            default:
+                console.log("Unit type not found");
+                break;
+            }
+        } else {
+            unit = "lb";
+            mode.value = value1 + " lbs" + ". Choose unit destination";
+        }
+}
+//-->Ounces
+function convOz(){
+    if(unit !==""){
+        switch(unit){
+            case "g": //1: 1 gram is 0.03527 ounces
+                result = Number(value1) * 0.0353;
+                mode.value = value1 + " g to oz:"
+                display.value = result.toFixed(6);
+                unit = "";
+                break;
+            case "kg": //2: 1 kg is 35.27 ounces
+                result = Number(value1) * 35.274;
+                mode.value = value1 + " kg to oz:"
+                display.value = result.toFixed(2);
+                unit = "";
+                break;
+            case "lb": //3: 1 pound is 16 ounces
+                result = Number(value1) * 16;
+                mode.value = value1 + " lb to oz:"
+                display.value = result.toFixed(2);
+                unit = "";
+                break;
+            case "st": //4: 1 stone is 224 ounces
+                result = Number(value1) * 224;
+                mode.value = value1 + " st to oz:"
+                display.value = result.toFixed(2);
+                unit = "";
+                break;
+            default:
+                console.log("Unit type not found");
+                break;
+        }
+    } else {
+        unit = "oz";
+        step = 1;
+        mode.value = value1 + " oz" + ". Choose unit destination";
+    }
+}
+//-->Stone
+function convSt(){ //<--Stones
+    if(unit !==""){
+        switch(unit){
+            case "g": //1: 1 gram is 0.000157 stones
+                result = (Number(value1) / 1000) * 0.1575;
+                mode.value = value1 + " g to st:"
+                display.value = result.toFixed(6);
+                unit = "";
+                break;
+            case "kg": //2: 1 kg is 0.1575
+                result = Number(value1) * 0.1575;
+                mode.value = value1 + " kg to st:"
+                display.value = result.toFixed(4);
+                unit = "";
+                break;
+            case "lb": //3: 1 lb is 0.0714 stones
+                result = Number(value1) * 0.0714;
+                mode.value = value1 + " lb to st:"
+                display.value = result.toFixed(6);
+                unit = "";
+                break;
+            case "oz": //4: 1 ounce is 0.00446 stones
+                result = Number(value1) * 0.00446;
+                mode.value = value1 + " oz to st:"
+                display.value = result.toFixed(6);
+                unit = "";
+                break;
+            default:
+                console.log("Unit type not found");
+                break;
+            }
+        } else {
+            unit = "st";
+            mode.value = value1 + " st" + ". Choose unit destination";
+        } 
+} 
