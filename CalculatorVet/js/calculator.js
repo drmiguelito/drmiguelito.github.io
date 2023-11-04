@@ -1,88 +1,46 @@
 //---Getting elements---
 const mode = document.getElementById("mode");
-const mode1 = document.getElementById("mode1");
-const mode2 = document.getElementById("mode2");
-const mode3 = document.getElementById("mode3");
-const mode4 = document.getElementById("mode4");
+const mode1 = document.getElementById("modePerc");
+const mode2 = document.getElementById("modeAddPerc");
+const mode3 = document.getElementById("modeRacing");
+const mode4 = document.getElementById("modeVet");
 const display = document.getElementById("display");
 
 //---Event listeners---
 document.addEventListener("click", clickPressed);
 document.addEventListener("keydown", keyPressed);
 
-//---Main functions---
+//---Main variables---
 var modeOption = 0;
 var step = 0;
 var value1, value2, value3 =  "";
 var unit = "";
 
+//---------------------------------------------------//
+//--Buttons--
 //>>Keyboard
 function keyPressed(event){
-    if(event.key === "Enter"){
-        calculate();
-    }
-    switch(event.key){
-        case "0":
-            display.value += "0";
-            break;
-        case "1":
-            display.value += "1";
-            break;
-        case "2":
-            display.value += "2";
-            break;
-        case "3":
-            display.value += "3";
-            break;
-        case "4":
-            display.value += "4";
-            break;
-        case "5":
-            display.value += "5";
-            break;
-        case "6":
-            display.value += "6";
-            break;
-        case "7":
-            display.value += "7";
-            break;
-        case "8":
-            display.value += "8";
-            break;
-        case "9":
-            display.value += "9";
-            break;
-        case ".":
-            display.value += ".";
-            break;
-        case "+":
-            display.value += "+";
-            brek;
-        case "-":
-            display.value += "-";
-            break;
-        case "*":
-            display.value += "*";
-            break;
-        case "/":
-            display.value += "/";
-            break;
-        case "Backspace":
-            backspace();
-            break;
-        case "Delete":
-            restart();
-            break;
-        case "p":
-            modePercentage();
-            break;
-        case "P":
-            modeAddPercentage();
-            break;
-        case "r":
-            modeRacing();
-            break;
-    }
+    if(event.key === "Enter") calculate();
+    if(event.key === "0") display.value += "0";
+    if(event.key === "1") display.value += "1";
+    if(event.key === "2") display.value += "2";
+    if(event.key === "3") display.value += "3";
+    if(event.key === "4") display.value += "4";
+    if(event.key === "5") display.value += "5";
+    if(event.key === "6") display.value += "6";
+    if(event.key === "7") display.value += "7";
+    if(event.key === "8") display.value += "8";
+    if(event.key === "9") display.value += "9";
+    if(event.key === ".") display.value += ".";
+    if(event.key === "+") display.value += "+";
+    if(event.key === "-") display.value += "-";
+    if(event.key === "*") display.value += "*";
+    if(event.key === "/") display.value += "/";
+    if(event.key === "Backspace") backspace();
+    if(event.key === "Delete") restart();
+    if(event.key === "p") modePercentage();
+    if(event.key === "P") modeAddPercentage();
+    if(event.key === "r") modeRacing();
 }
 //-->DE button
 function backspace(){ 
@@ -94,132 +52,128 @@ function restart(){
     mode.value = "";
     display.value = "";
 }
-//-->Enter button
-function calculate(){
-    //Regular calculations (+, -, /, *)
-    if(modeOption===0){
-        mode.value = display.value + " =";
-        if(display.value !== ""){
-            display.value = eval(display.value);
-        }
-    }
-    //Mode percentage (mode1)
-    if(modeOption===1){
-        modePercentage();
-    }
-    //Mode add percentage (mode2)
-    if(modeOption===2){
-        modeAddPercentage();
-    }
-    //Racing
-    if(modeOption===4){
-        modeRacing();
-    }
-}
-//>>Mouse
+//>>Mouse - touch
+//-->By id
 function selectMode(modeID){
+    if(modeID === "enter") calculate();
+    if(modeID === "modePerc") modePercentage(); // Percentage (%p)
+    if(modeID === "modeAddPerc") modeAddPercentage(); // Add percentage (+p%)
+    if(modeID === "modeRacing") modeRacing();
+    if(modeID ==="squareRoot") calc_squareRoot(); //Square root (√)
+    if(modeID ==="squared") calc_squared(); //Squared (X^2)
+    if(modeID ==="ln") calc_ln(); // Natural logarithm (ln)
+    if(modeID ==="circ") calc_circ(); // Circule (CIRC)
+    if(modeID === "modeConversor") mode.value = "Unidades: Elija unidad de origen";
+    if(modeID === "convGs") convGs(); //Mass: grams
+    if(modeID === "convMg") convMg(); //Mass: miligrams
+    if(modeID === "convMcg") convMcg(); //Mass: micrograms
+    if(modeID === "convUI") convUI(); //Mass: International Units
+    if(modeID === "convPPM") convPPM(); //Mass: Parts Per Mille
+    if(modeID === "convM") convM(); //Distance: meters
+    if(modeID === "convKm") convKm(); //Distance: kilometers
+    if(modeID === "convMi") convMi(); //Distance: miles
+    if(modeID === "convFt") convFt(); //Distance: feets
+    if(modeID === "convYd") convYd(); //Distance: yars
+    if(modeID === "convC") convC(); //Temperature: celsius
+    if(modeID === "convF") convF(); //Temperature: farenheit
+    if(modeID === "convK") convK(); //Temperature: kelvin
+}
+//-->Enter button
+function calculate(){ 
+    if(modeOption===0) calc_general(); //mode 0
+    if(modeOption===1) calc_percentage(); //mode 1
+    if(modeOption===2) calc_addPercentage(); //mode 2
+    if(modeOption===4) modeRacing(); //mode 4
+}
+//-->Percentage mode button (%p)
+function modePercentage(){
     step = 0;
-    //Percentage mode
-    if(modeID === "mode1"){
-        if(modeOption === 1){ //If already is selected...
-            modeOption = 0;
-            mode.value = "";
-        } else { //If not...
-            modeOption = 1;
-            calculate();
-        }
-        console.log("modeOption " + modeOption + " (percentage)");
+    if(modeOption === 1){ //If already is selected...
+        modeOption = 0;
+        mode.value = "";
+    } else { //If not...
+        modeOption = 1;
+        calculate();
     }
-    //Add percentage mode 
-    if(modeID === "mode2"){
-        if(modeOption === 2){
-            modeOption = 0;
-            mode.value = "";
-        } else {
-            modeOption = 2;
-            calculate();
-        }
-        console.log("modeOption " + modeOption + " (add percentage)");
+    console.log("modeOption " + modeOption + " (percentage)");
+}
+//-->Add percentage button (+%p)
+function modeAddPercentage(){
+    step = 0;
+    if(modeOption === 2){
+        modeOption = 0;
+        mode.value = "";
+    } else {
+        modeOption = 2;
+        calculate();
     }
-    //--Mode horse racing km/h
-    if(modeID === "mode4"){
-        if(modeOption === 4){
-            modeOption = 0;
-            mode.value = "";
-            //display.value = "";
-        } 
-        else{
-            modeOption = 4;
-            calculate();
-        }
-        console.log("modeOption " + modeOption + " (racing)");
+    console.log("modeOption " + modeOption + " (add percentage)");
+}
+//-->Racing button
+function modeRacing(){
+    step = 0;
+    if(modeOption === 4){
+        modeOption = 0;
+        mode.value = "";
+        //display.value = "";
+    } 
+    else{
+        modeOption = 4;
+        calculate();
     }
-    //Unit conversor
+    console.log("modeOption " + modeOption + " (racing)");
+}
+//-->Convert unit buttons
+function calc_convertion(){
     if(display.value !== ""){
         value1 = display.value;
         console.log(modeID);
-        switch(modeID){
-            case "modeConversor":
-                mode.value = "Convert units: choose initial unit";
-                break;
-            case "convGs":
-                convGs();
-                break;
-            case "convKg":
-                convKg();
-                break;
-            case "convOz":
-                convOz();
-                break;
-            case "convLb":
-                convLb();
-                break;
-            case "convSt":
-                convSt();
-                break;
-        } 
-    }else{
-        mode.value = "Enter a number and choose unit";
-    }
-    //Other calculations
-    //Square root:
-    if(modeID ==="squareRoot"){
-        value1 = display.value;
-        result = Math.sqrt(Number(value1));
-        mode.value = "√" + value1 + " =";
-        display.value = result.toFixed(2);
-        value1 = 0; //clear
-    }
-    //Squared:
-    if(modeID ==="squared"){
-        value1 = display.value;
-        result = Number(value1)*Number(value1);
-        mode.value = value1 + "^2 =";
-        display.value = result.toFixed(2);
-        value1 = 0; //clear
-    }
-    if(modeID ==="ln"){
-        value1 = display.value;
-        result = Math.log(Number(value1));
-        mode.value = "ln(" + value1 + ") =";
-        display.value = result.toFixed(2);
-        value1 = 0; //clear
-    }
-    if(modeID ==="circ"){
-        if(display.value !== ""){
-            value1 = display.value;
-            result = Math.PI * Number(value1) * Number(value1);
-            mode.value = "The cimcurference (r = " + value1 + ") is:";
-            display.value = result.toFixed(2);
-            value1 = 0; //clear
-        } else {
-            mode.value = "Enter radius and press 'circ' button"
-        }
+         
+    } else mode.value = "Ingrese valor";
+}
+//---------------------------------------------------//
+//--General calculations-- 
+function calc_general(){
+    mode.value = display.value + " =";
+    if(display.value !== ""){
+        display.value = eval(display.value);
     }
 }
-//--Mode functions
-//Mode1: Percentage (p% button)
-function modePercentage(){
+function calc_squareRoot(){
+    value1 = display.value;
+    result = Math.sqrt(Number(value1));
+    mode.value = "√" + value1 + " =";
+    display.value = result.toFixed(2);
+    value1 = 0; 
+}
+function calc_squared(){
+    value1 = display.value;
+    result = Number(value1)*Number(value1);
+    mode.value = value1 + "^2 =";
+    display.value = result.toFixed(2);
+    value1 = 0;
+}
+function calc_ln(){
+    value1 = display.value;
+    result = Math.log(Number(value1));
+    mode.value = "ln(" + value1 + ") =";
+    display.value = result.toFixed(2);
+    value1 = 0;
+}
+function calc_circ(){
+    if(display.value !== ""){
+        value1 = display.value;
+        result = Math.PI * Number(value1) * Number(value1);
+        mode.value = "La circunferencia (r = " + value1 + ") es:";
+        display.value = result.toFixed(2);
+        value1 = 0;
+    } else {
+        mode.value = "Ingrese radio y presione CIRC"
+    }
+}
+//---------------------------------------------------//
+//--Mode calculations--
+function calc_percentage(){
     console.log("percentage step: " + step);
     //Step 2: clear values
     if(step === 2){
@@ -234,7 +188,7 @@ function modePercentage(){
             value2 = display.value;
             display.value = "";
             result = (Number(value1) * Number(value2)) / 100; 
-            mode.value = "🅿️ The " + value2 + "% of " + value1 + " is:";
+            mode.value = "🅿️ El " + value2 + "% de " + value1 + " es:";
             display.value = result;
             step++;
             console.log("percentage step--> " + step);
@@ -245,18 +199,17 @@ function modePercentage(){
         if(modeOption === 1){
             if(display.value !== ""){ //If there's a value already...
                 value1 = display.value;
-                mode.value = "🅿️ You entered: " + value1 + ". Put %";
+                mode.value = "🅿️ Ingresó: " + value1 + ". Escriba %";
                 display.value = "";
                 step++;
             } else { //If there's no value...
-                mode.value = "🅿️ Put a number to calculate %";
+                mode.value = "🅿️ Ingrese número...";
             }
         } 
         console.log("percentage step--> " + step);
     }
 }
-//Mode2: Add percentage (+p% button)
-function modeAddPercentage(){
+function calc_addPercentage(){
     console.log("add percentage step: " + step);
     //Paso 2: clear values
     if(step === 3){
@@ -269,7 +222,7 @@ function modeAddPercentage(){
     if(step === 1){
         if(display.value !== ""){
             value2 = display.value;
-            mode.value = "🅿️ " + value1 + " + their " + value2 + "% is:";
+            mode.value = "🅿️ " + value1 + " + su " + value2 + "% es:";
             result = Number(value1) + ((Number(value1) * Number(value2)) / 100);
             display.value = result;
             step++;
@@ -281,32 +234,15 @@ function modeAddPercentage(){
         if(display.value !== ""){
             value1 = display.value;
             display.value ="";
-            mode.value = "🅿️ You entered: " + value1 + ". Put %";
+            mode.value = "🅿️ Valor: " + value1 + ". Ingrese %";
             step++;
         } else {
-            mode.value = "🅿️ Put a number and after press enter";
+            mode.value = "🅿️ Ingrese número y luego presione enter";
         }
         console.log("add percentage step--> " + step);
     }
 }
-
-
-
-
-function clickPressed(){
-
-}
-//--Mode functions--
-
-//-->Add percentage (+p% button)
-
-
-//---Mode functions---
-
-
-
-//--Racing (km/h)
-function modeRacing(){
+function calc_racingKMH(){
     //Step 3: clear
     console.log("racing step: " + step);
     if(step === 3){
@@ -319,7 +255,7 @@ function modeRacing(){
     if(display.value !== ""){
         if(step === 2){
             value2 = display.value;
-            mode.value = "🏇The speed over " + value1 + "m in " + value2 + "s is (km/h): ";
+            mode.value = "🏇Velocidad en " + value1 + "m in " + value2 + "s es (km/h): ";
             var result = (Number(value1) / Number(value2)) *3.6;
             display.value = Math.round(result);
             step++;
@@ -329,20 +265,293 @@ function modeRacing(){
     if(display.value !== ""){
         if(step === 1){
             value1 = display.value;
-            mode.value = "🏇 Distance: " + value1 + " m. Put SECONDS";
+            mode.value = "🏇 Distancia: " + value1 + " m. Ingrese SECONDS";
             display.value = ""; 
             step++;
         }
     }
     //Step 0: first value (meters)
     if(step === 0){
-        mode.value = "🏇(KM/H using meters and seconds)";
+        mode.value = "🏇(KM/H usando mts y segundos)";
         setTimeout(()=>{
-            if(modeOption === 4) mode.value = "🏇 Put DISTANCE (meters)";
+            if(modeOption === 4) mode.value = "🏇 Ingrese DISTANCE (meters)";
         }, 2000);       
         step++;
     }
 }
+//---------------------------------------------------//
+//---Units calculations----
+//--Mass--
+function convGs(){ //Grams
+    if(unit !==""){
+        switch(unit){
+            case "mg": //1
+                result = Number(value1) / 1000;
+                mode.value = value1 + " mg a g:"
+                display.value = result;
+                unit = "";
+                break;
+            case "mcg": //2
+                result = Number(value1) / 1000000;
+                mode.value = value1 + " mcg a g:"
+                display.value = result;
+                unit = "";
+                break;
+            case "UI": //3
+                result = Number(value1) / 1000000 / 0.03;
+                mode.value = value1 + " UI (insulina porcina) to g:"
+                display.value = result;
+                unit = "";
+                break;
+            case "ppm": //4
+                result = Number(value1) / 1000;
+                mode.value = value1 + " ppm a g/L:"
+                display.value = result;
+                unit = "";
+                break;
+            default:
+                console.log("Unit type not found");
+                break;
+        }
+    } else {
+        unit = "g";
+        mode.value = value1 + " gs" + ". Elija unidad destino";
+    }
+}
+function convMg(){ //Miligrams
+    if(unit !==""){
+        switch(unit){
+            case "g": //1
+                result = Number(value1) * 1000;
+                mode.value = value1 + "g a mg:"
+                display.value = result.toFixed(2);
+                unit = "";
+                break;
+            case "mcg": //2
+                result = Number(value1) / 1000;
+                mode.value = value1 + "mcg a mg:"
+                display.value = result.toFixed(2);
+                unit = "";
+                break;
+            case "UI": //3
+                result = Number(value1) / 0.03;
+                mode.value = value1 + "UI to mg:"
+                display.value = result.toFixed(2);
+                unit = "";
+                break;
+            case "ppm": //4
+                result = Number(value1);
+                mode.value = value1 + " ppm to mg/L (1 ppm = 1mg/L):"
+                display.value = result.toFixed(2);
+                unit = "";
+                break;
+            default:
+                console.log("Unit type not found");
+                break;
+        }
+    } else {
+        unit = "mg";
+        mode.value = value1 + " mg" + ". Elija unidad destino";
+    }
+}
+function convMcg(){ //Micrograms
+    if(unit !==""){
+        switch(unit){
+            case "g": //1
+                result = Number(value1) * 1000000;
+                mode.value = value1 + " g a mcg:"
+                display.value = result.toFixed(2);
+                unit = "";
+                break;
+            case "mg": //2
+                result = Number(value1) * 1000;
+                mode.value = value1 + " mg a mcg:"
+                display.value = result.toFixed(2);
+                unit = "";
+                break;
+            case "UI": //3
+                result = Number(value1) * 0.03;
+                mode.value = value1 + " UI (insulina porcina) a mcg:"
+                display.value = result.toFixed(2);
+                unit = "";
+                break;
+            case "ppm": //4
+                result = Number(value1);
+                mode.value = value1 + " ppm to mcg/L:"
+                display.value = result.toFixed(2);
+                unit = "";
+                break;
+            default:
+                console.log("Unit type not found");
+                break;
+            }
+        } else {
+            unit = "mcg";
+            mode.value = value1 + " mcg" + ". Elija unidad destino";
+        }
+}
+function convPPM(){ //Parts Per Mille
+    if(unit !==""){
+        switch(unit){
+            case "g": //1
+                result = Number(value1) / 1000000
+                mode.value = value1 + " g/L a ppm:"
+                display.value = result.toFixed(2);
+                unit = "";
+                break;
+            case "mg": //2
+                result = Number(value1) / 1000;
+                mode.value = value1 + " mg/L a ppm:"
+                display.value = result.toFixed(2);
+                unit = "";
+                break;
+            case "mcg": //3
+                result = Number(value1) * 0.9988;
+                mode.value = value1 + " mcg/L a ppm:"
+                display.value = result.toFixed(4);
+                unit = "";
+                break;
+            case "UI": //4: 1 stone is 224 ounces
+                result = (Number(value1) / 0.03) * 1000;
+                mode.value = value1 + " UI/L a ppm:"
+                display.value = result.toFixed(2);
+                unit = "";
+                break;
+            default:
+                console.log("Unit type not found");
+                break;
+        }
+    } else {
+        unit = "ppm";
+        step = 1;
+        mode.value = value1 + " ppm" + ". Elija unidad/L destino";
+    }
+}
+function convUI(){ //International Units
+    if(unit !==""){
+        switch(unit){
+            case "g": //1
+                result = (Number(value1) * 1000000) / 0.03;
+                mode.value = value1 + " g a UI (insul. porcina):"
+                display.value = result.toFixed(2);
+                unit = "";
+                break;
+            case "mg": //2
+                result = (Number(value1) * 1000) / 0.03;
+                mode.value = value1 + " mg a UI (insul. porcina):"
+                display.value = result.toFixed(2);
+                unit = "";
+                break;
+            case "mcg": //3
+                result = Number(value1) * 0.03;
+                mode.value = value1 + " mcg a UI (insul. porcina):"
+                display.value = result.toFixed(4);
+                unit = "";
+                break;
+            case "ppm": //4
+                result = Number(value1) * 0.03;
+                mode.value = value1 + " ppm to UI/L:"
+                display.value = result.toFixed(4);
+                unit = "";
+                break;
+            default:
+                console.log("Unit type not found");
+                break;
+            }
+        } else {
+            unit = "UI";
+            mode.value = value1 + " " + unit + ". Elija unidad destino";
+        } 
+}   
+//--Temperature--
+function convC(){ //Celsius
+    if(unit !==""){
+        switch(unit){
+            case "F": //1
+                result = (Number(value1) * 1000000) / 0.03;
+                mode.value = value1 + " g a UI (insul. porcina):"
+                display.value = result.toFixed(2);
+                unit = "";
+                break;
+            case "K": //2
+                result = (Number(value1) * 1000) / 0.03;
+                mode.value = value1 + " mg a UI (insul. porcina):"
+                display.value = result.toFixed(2);
+                unit = "";
+                break;
+            default:
+                console.log("Unit type not found");
+                break;
+            }
+        } else {
+            unit = "C";
+            mode.value = value1 + " " + unit + ". Elija unidad destino";
+        } 
+}
+function convF(){ //Fahrenheit
+    if(unit !==""){
+        switch(unit){
+            case "C": //1 (1°C = 33.8F)
+                result = Number(value1) * 33.8;
+                mode.value = value1 + " °C a Fahrenheit:"
+                display.value = result.toFixed(2);
+                unit = "";
+                break;
+            case "K": //2
+                result = Number(value1) * (-457.87);
+                mode.value = value1 + " Kelvin a Fahrenheit:"
+                display.value = result.toFixed(2);
+                unit = "";
+                break;
+            default:
+                console.log("Unit type not found");
+                break;
+            }
+        } else {
+            unit = "F";
+            mode.value = value1 + " " + unit + ". Elija unidad destino";
+        } 
+}
+function convK(){ //Kelvin
+    if(unit !==""){
+        switch(unit){
+            case "C": //1
+                result = (Number(value1) * 1000000) / 0.03;
+                mode.value = value1 + " g a UI (insul. porcina):"
+                display.value = result.toFixed(2);
+                unit = "";
+                break;
+            case "F": //2
+                result = (Number(value1) * 1000) / 0.03;
+                mode.value = value1 + " mg a UI (insul. porcina):"
+                display.value = result.toFixed(2);
+                unit = "";
+                break;
+            default:
+                console.log("Unit type not found");
+                break;
+            }
+        } else {
+            unit = "K";
+            mode.value = value1 + " " + unit + ". Elija unidad destino";
+        } 
+}
+
+
+function clickPressed(){
+
+}
+
+
+
+
+
+
+
+
+
+
+
 //--Veterinary (fluid therapy)
 function modeVeterinaryDose(){
     if(step === 3){
@@ -355,7 +564,7 @@ function modeVeterinaryDose(){
     if(display.value !== ""){
         if(step === 2){
             value2 = display.value;
-            mode.value = "🏇The speed over " + value1 + "m in " + value2 + "s is (km/h): ";
+            mode.value = "🏇LA velocidad de " + value1 + "m en " + value2 + "s es (km/h): ";
             var result = (Number(value1) / Number(value2)) *3.6;
             display.value = Math.round(result);
             step++;
@@ -372,198 +581,11 @@ function modeVeterinaryDose(){
     }
     //Step 0: first value (weight in kg)
     if(step === 0){
-        mode.value = "💉(Dose per day)";
+        mode.value = "💉(Dosis/día)";
         setTimeout(()=>{
-            if(modeOption === 4) mode.value = "💉 Put WEIGHT (kg)";
+            if(modeOption === 4) mode.value = "💉 Ingrese peso (kg)";
         }, 2000);       
         step++;
     }
     console.log("modeOption " + modeOption + " (percentage)");
 }
-//---Conversion functions----
-//-->Grams
-function convGs(){
-    if(unit !==""){
-        switch(unit){
-            case "kg": //1
-                result = Number(value1) * 1000;
-                mode.value = value1 + " kg to g:"
-                display.value = result;
-                unit = "";
-                break;
-            case "lb": //2: 1 pound equals 453.6 grams
-                result = Number(value1) * 453.592;
-                mode.value = value1 + " lb to g:"
-                display.value = result;
-                unit = "";
-                break;
-            case "st": //3: 1 stone equals 6,350.29 grams
-                result = Number(value1) * 6350.29;
-                mode.value = value1 + " st to g:"
-                display.value = result;
-                unit = "";
-                break;
-            case "oz": //4: 1 ounce equals to 28.35 grams
-                result = Number(value1) * 28.35;
-                mode.value = value1 + " oz to g:"
-                display.value = result;
-                unit = "";
-                break;
-            default:
-                console.log("Unit type not found");
-                break;
-        }
-    } else {
-        unit = "g";
-        mode.value = value1 + " gs" + ". Choose unit destination";
-    }
-}
-//-->Kilograms
-function convKg(){
-    if(unit !==""){
-        switch(unit){
-            case "g": //1
-                result = Number(value1) / 1000;
-                mode.value = value1 + "g to kg:"
-                display.value = result;
-                unit = "";
-                break;
-            case "lb": //2: 1 pound is 0.4536 kg
-                result = Number(value1) * 0.4536;
-                mode.value = value1 + "lb to kg:"
-                display.value = result.toFixed(4);
-                unit = "";
-                break;
-            case "st": //3: 1 stone is 0.1574 kg
-                result = Number(value1) / 0.1574;
-                mode.value = value1 + "st to kg:"
-                display.value = result.toFixed(4);
-                unit = "";
-                break;
-            case "oz": //4: 1 ounce is 0.02834 kg
-                result = Number(value1) * 0.02834;
-                mode.value = value1 + " oz to kg:"
-                display.value = result;
-                unit = "";
-                break;
-            default:
-                console.log("Unit type not found");
-                break;
-        }
-    } else {
-        unit = "kg";
-        mode.value = value1 + " kg" + ". Choose unit destination";
-    }
-}
-//-->Pounds
-function convLb(){ //<-- Pounds
-    if(unit !==""){
-        switch(unit){
-            case "g": //1: 1 gram is 0.002204 lbs
-                result = (Number(value1) / 1000) * 2.204;
-                mode.value = value1 + " g to lb:"
-                display.value = result.toFixed(6);
-                unit = "";
-                break;
-            case "kg": //2: 1 kg is 2.204 lbs
-                result = Number(value1) * 2.204;
-                mode.value = value1 + " kg to lb:"
-                display.value = result.toFixed(2);
-                unit = "";
-                break;
-            case "st": //3: 1 st is 14 lbs
-                result = Number(value1) * 14;
-                mode.value = value1 + " st to lb:"
-                display.value = result.toFixed(2);
-                unit = "";
-                break;
-            case "oz": //4: 1 oz is 0.0625 lbs
-                result = Number(value1) * 0.0625;
-                mode.value = value1 + " oz to lb:"
-                display.value = result.toFixed(2);
-                unit = "";
-                break;
-            default:
-                console.log("Unit type not found");
-                break;
-            }
-        } else {
-            unit = "lb";
-            mode.value = value1 + " lbs" + ". Choose unit destination";
-        }
-}
-//-->Ounces
-function convOz(){
-    if(unit !==""){
-        switch(unit){
-            case "g": //1: 1 gram is 0.03527 ounces
-                result = Number(value1) * 0.0353;
-                mode.value = value1 + " g to oz:"
-                display.value = result.toFixed(6);
-                unit = "";
-                break;
-            case "kg": //2: 1 kg is 35.27 ounces
-                result = Number(value1) * 35.274;
-                mode.value = value1 + " kg to oz:"
-                display.value = result.toFixed(2);
-                unit = "";
-                break;
-            case "lb": //3: 1 pound is 16 ounces
-                result = Number(value1) * 16;
-                mode.value = value1 + " lb to oz:"
-                display.value = result.toFixed(2);
-                unit = "";
-                break;
-            case "st": //4: 1 stone is 224 ounces
-                result = Number(value1) * 224;
-                mode.value = value1 + " st to oz:"
-                display.value = result.toFixed(2);
-                unit = "";
-                break;
-            default:
-                console.log("Unit type not found");
-                break;
-        }
-    } else {
-        unit = "oz";
-        step = 1;
-        mode.value = value1 + " oz" + ". Choose unit destination";
-    }
-}
-//-->Stone
-function convSt(){ //<--Stones
-    if(unit !==""){
-        switch(unit){
-            case "g": //1: 1 gram is 0.000157 stones
-                result = (Number(value1) / 1000) * 0.1575;
-                mode.value = value1 + " g to st:"
-                display.value = result.toFixed(6);
-                unit = "";
-                break;
-            case "kg": //2: 1 kg is 0.1575
-                result = Number(value1) * 0.1575;
-                mode.value = value1 + " kg to st:"
-                display.value = result.toFixed(4);
-                unit = "";
-                break;
-            case "lb": //3: 1 lb is 0.0714 stones
-                result = Number(value1) * 0.0714;
-                mode.value = value1 + " lb to st:"
-                display.value = result.toFixed(6);
-                unit = "";
-                break;
-            case "oz": //4: 1 ounce is 0.00446 stones
-                result = Number(value1) * 0.00446;
-                mode.value = value1 + " oz to st:"
-                display.value = result.toFixed(6);
-                unit = "";
-                break;
-            default:
-                console.log("Unit type not found");
-                break;
-            }
-        } else {
-            unit = "st";
-            mode.value = value1 + " st" + ". Choose unit destination";
-        } 
-} 
