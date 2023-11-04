@@ -11,8 +11,7 @@ document.addEventListener("click", clickPressed);
 document.addEventListener("keydown", keyPressed);
 
 //---Main variables---
-var modeOption = 0;
-var step = 0;
+var modeOption, step = 0;
 var value1, value2, value3 =  "";
 var unit = "";
 
