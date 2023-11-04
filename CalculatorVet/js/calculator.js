@@ -288,19 +288,19 @@ function convGs(){ //Grams
                 result = Number(value1) / 1000;
                 mode.value = value1 + " mg a g:"
                 display.value = result;
-                unit = "";
+                //unit = "";
                 break;
             case "mcg": //2
                 result = Number(value1) / 1000000;
                 mode.value = value1 + " mcg a g:"
                 display.value = result;
-                unit = "";
+                //unit = "";
                 break;
             case "UI": //3
                 result = Number(value1) / 1000000 / 0.03;
                 mode.value = value1 + " UI (insulina porcina) to g:"
                 display.value = result;
-                unit = "";
+                //unit = "";
                 break;
             case "ppm": //4
                 result = Number(value1) / 1000;
@@ -324,7 +324,7 @@ function convMg(){ //Miligrams
                 result = Number(value1) * 1000;
                 mode.value = value1 + "g a mg:"
                 display.value = result.toFixed(2);
-                unit = "";
+                //unit = "";
                 break;
             case "mcg": //2
                 result = Number(value1) / 1000;
@@ -366,19 +366,19 @@ function convMcg(){ //Micrograms
                 result = Number(value1) * 1000;
                 mode.value = value1 + " mg a mcg:"
                 display.value = result.toFixed(2);
-                unit = "";
+                //unit = "";
                 break;
             case "UI": //3
                 result = Number(value1) * 0.03;
                 mode.value = value1 + " UI (insulina porcina) a mcg:"
                 display.value = result.toFixed(2);
-                unit = "";
+                //unit = "";
                 break;
             case "ppm": //4
                 result = Number(value1);
                 mode.value = value1 + " ppm to mcg/L:"
                 display.value = result.toFixed(2);
-                unit = "";
+                //unit = "";
                 break;
             default:
                 console.log("Unit type not found");
@@ -396,25 +396,25 @@ function convPPM(){ //Parts Per Mille
                 result = Number(value1) / 1000000
                 mode.value = value1 + " g/L a ppm:"
                 display.value = result.toFixed(2);
-                unit = "";
+                //unit = "";
                 break;
             case "mg": //2
                 result = Number(value1) / 1000;
                 mode.value = value1 + " mg/L a ppm:"
                 display.value = result.toFixed(2);
-                unit = "";
+                //unit = "";
                 break;
             case "mcg": //3
                 result = Number(value1) * 0.9988;
                 mode.value = value1 + " mcg/L a ppm:"
                 display.value = result.toFixed(4);
-                unit = "";
+                //unit = "";
                 break;
             case "UI": //4: 1 stone is 224 ounces
                 result = (Number(value1) / 0.03) * 1000;
                 mode.value = value1 + " UI/L a ppm:"
                 display.value = result.toFixed(2);
-                unit = "";
+                //unit = "";
                 break;
             default:
                 console.log("Unit type not found");
@@ -422,7 +422,6 @@ function convPPM(){ //Parts Per Mille
         }
     } else {
         unit = "ppm";
-        step = 1;
         mode.value = value1 + " ppm" + ". Elija unidad/L destino";
     }
 }
@@ -433,25 +432,25 @@ function convUI(){ //International Units
                 result = (Number(value1) * 1000000) / 0.03;
                 mode.value = value1 + " g a UI (insul. porcina):"
                 display.value = result.toFixed(2);
-                unit = "";
+                //unit = "";
                 break;
             case "mg": //2
                 result = (Number(value1) * 1000) / 0.03;
                 mode.value = value1 + " mg a UI (insul. porcina):"
                 display.value = result.toFixed(2);
-                unit = "";
+                //unit = "";
                 break;
             case "mcg": //3
                 result = Number(value1) * 0.03;
                 mode.value = value1 + " mcg a UI (insul. porcina):"
                 display.value = result.toFixed(4);
-                unit = "";
+                //unit = "";
                 break;
             case "ppm": //4
                 result = Number(value1) * 0.03;
                 mode.value = value1 + " ppm to UI/L:"
                 display.value = result.toFixed(4);
-                unit = "";
+                //unit = "";
                 break;
             default:
                 console.log("Unit type not found");
@@ -470,13 +469,13 @@ function convC(){ //Celsius
                 result = (Number(value1) * 1000000) / 0.03;
                 mode.value = value1 + " g a UI (insul. porcina):"
                 display.value = result.toFixed(2);
-                unit = "";
+                //unit = "";
                 break;
             case "K": //2
                 result = (Number(value1) * 1000) / 0.03;
                 mode.value = value1 + " mg a UI (insul. porcina):"
                 display.value = result.toFixed(2);
-                unit = "";
+                //unit = "";
                 break;
             default:
                 console.log("Unit type not found");
