@@ -50,6 +50,7 @@ function restart(){
     modeOption = 0;
     mode.value = "";
     display.value = "";
+    unit = 0;
 }
 //>>Mouse - touch
 //-->By id
