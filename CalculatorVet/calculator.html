@@ -50,8 +50,7 @@
                     <div>
                         <input type="button" value="00" onclick="display.value +='00'"> 
                         <input type="button" value="0" onclick="display.value +='0'"> 
-                        <input type="button" value="Enter" class="equalOperator operator"
-                        onclick="calculate()"> 
+                        <input type="button" value="Enter" class="equalOperator operator" id="enter" onclick="selectMode(this.id)"> 
                     </div>   
                     <!--Row 6 (mode options)-->
                     <div>
@@ -63,35 +62,35 @@
                                         <input type="button" value="⚖️" class="modeStyle">
                                         <ul>
                                             <li><input type="button" value="g" id="convGs" class="modeStyle" onclick="selectMode(this.id)"></li>
-                                            <li><input type="button" value="Kg" id="convKg" class="modeStyle" onclick="selectMode(this.id)"></li>
-                                            <li><input type="button" value="Oz" id="convOz" class="modeStyle" onclick="selectMode(this.id)"></li>
-                                            <li><input type="button" value="Lb" id="convLb" class="modeStyle" onclick="selectMode(this.id)"></li>
-                                            <li><input type="button" value="St" id="convSt" class="modeStyle" onclick="selectMode(this.id)"></li>
+                                            <li><input type="button" value="mg" id="convMg" class="modeStyle" onclick="selectMode(this.id)"></li>
+                                            <li><input type="button" value="µg " id="convMcg" class="modeStyle" onclick="selectMode(this.id)"></li>
+                                            <li><input type="button" value="UI" id="convUI" class="modeStyle" onclick="selectMode(this.id)"></li>
+                                            <li><input type="button" value="ppm" id="convPPM" class="modeStyle" onclick="selectMode(this.id)"></li>
                                         </ul>                
                                     </li>
                                     <li>
                                         <input type="button" value="🌡️" class="modeStyle">
                                         <ul>
-                                            <li><input type="button" value="°C" id="convC" class="modeStyle" onclick="selectMode(this.id)"></li>
-                                            <li><input type="button" value="°F" id="convF" class="modeStyle" onclick="selectMode(this.id)"></li>
-                                            <li><input type="button" value="K" id="convK" class="modeStyle" onclick="selectMode(this.id)"></li>
+                                            <li class="subMenu"><input type="button" value="°C" id="convC" class="modeStyle" onclick="selectMode(this.id)"></li>
+                                            <li class="subMenu"><input type="button" value="°F" id="convF" class="modeStyle" onclick="selectMode(this.id)"></li>
+                                            <li class="subMenu"><input type="button" value="K" id="convK" class="modeStyle" onclick="selectMode(this.id)"></li>
                                         </ul>
                                     </li>
                                     <li>
                                         <input type="button" value="📏" class="modeStyle" onclick="display.value =''">
                                         <ul>
-                                            <li><input type="button" value="m" class="modeStyle" onclick="display.value =''"></li>
-                                            <li><input type="button" value="Km" alt="meters" class="modeStyle" onclick="display.value =''"></li>
-                                            <li><input type="button" value="Mi" alt="furlogs" class="modeStyle" onclick="display.value =''"></li>
-                                            <li><input type="button" value="Fur" alt="miles" class="modeStyle" onclick="display.value =''"></li>
-                                            <li><input type="button" value="Yds" class="modeStyle" onclick="display.value =''"></li>
+                                            <li><input type="button" value="m" id="convM" class="modeStyle" onclick="selectMode(this.id)"></li>
+                                            <li><input type="button" value="Km" id="convKm" class="modeStyle" onclick="selectMode(this.id)"></li>
+                                            <li><input type="button" value="Mi" id="convMi" class="modeStyle" onclick="selectMode(this.id)"></li>
+                                            <li><input type="button" value="Ft" id="convFt" class="modeStyle" onclick="selectMode(this.id)"></li>
+                                            <li><input type="button" value="Yd" id="convYd" class="modeStyle" onclick="selectMode(this.id)"></li>
                                         </ul>
                                     </li>
-                                </ul>
+                                </ul> 
                             </li>
-                            <input type="button" value="p%" id="mode1" class="modeStyle" onclick="selectMode(this.id)">
-                            <input type="button" value="+p%" id="mode2" class="modeStyle" onclick="selectMode(this.id)">
-                            <input type="button" value="🏇" id="mode4" class="modeStyle" onclick="selectMode(this.id)">
+                            <input type="button" value="p%" id="modePerc" class="modeStyle" onclick="selectMode(this.id)">
+                            <input type="button" value="+p%" id="modeAddPerc" class="modeStyle" onclick="selectMode(this.id)">
+                            <input type="button" value="🏇" id="modeRacing" class="modeStyle" onclick="selectMode(this.id)">
                         </ul>
                     </div>      
                     <!--Row 7 (Other options)-->
