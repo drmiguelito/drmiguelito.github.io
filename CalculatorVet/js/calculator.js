@@ -485,7 +485,7 @@ function convC(){ //Celsius
         } else {
             switch(unit){
                 case "F": //1
-                    result = (parseFloat(value1) * 1.8) + 32;
+                    result = (parseFloat(value1) - 32) / 1.8;
                     mode.value = value1 + " F a Celsius:"
                     display.value = result.toFixed(2);
                     unit = "";
