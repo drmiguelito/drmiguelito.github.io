@@ -11,7 +11,8 @@ document.addEventListener("click", clickPressed);
 document.addEventListener("keydown", keyPressed);
 
 //---Main variables---
-var modeOption, step = 0;
+var modeOption = 0;
+var step = 0;
 var value1, value2, value3 =  "";
 var unit = "";
 
@@ -50,7 +51,6 @@ function restart(){
     modeOption = 0;
     mode.value = "";
     display.value = "";
-    unit = 0;
 }
 //>>Mouse - touch
 //-->By id
@@ -76,7 +76,8 @@ function selectMode(modeID){
     if(modeID === "convYd") convYd(); //Distance: yars
     if(modeID === "convC") convC(); //Temperature: celsius
     if(modeID === "convF") convF(); //Temperature: farenheit
-    if(modeID === "convK") convK(); //Temperature: kelvin
+    if(modeID === "convK") convK();//Temperature: kelvin
+    console.log(modeID);
 }
 //-->Enter button
 function calculate(){ 
@@ -122,14 +123,6 @@ function modeRacing(){
         calculate();
     }
     console.log("modeOption " + modeOption + " (racing)");
-}
-//-->Convert unit buttons
-function calc_convertion(){
-    if(display.value !== ""){
-        value1 = display.value;
-        console.log(modeID);
-         
-    } else mode.value = "Ingrese valor";
 }
 //---------------------------------------------------//
 //--General calculations-- 
@@ -281,261 +274,289 @@ function calc_racingKMH(){
 }
 //---------------------------------------------------//
 //---Units calculations----
+function calc_convertion(){
+    if(display.value !== ""){
+        value1 = display.value;    
+    } else mode.value = "Ingrese valor";
+}
 //--Mass--
 function convGs(){ //Grams
-    if(unit !==""){
-        switch(unit){
-            case "mg": //1
-                result = Number(value1) / 1000;
-                mode.value = value1 + " mg a g:"
-                display.value = result;
-                //unit = "";
-                break;
-            case "mcg": //2
-                result = Number(value1) / 1000000;
-                mode.value = value1 + " mcg a g:"
-                display.value = result;
-                //unit = "";
-                break;
-            case "UI": //3
-                result = Number(value1) / 1000000 / 0.03;
-                mode.value = value1 + " UI (insulina porcina) to g:"
-                display.value = result;
-                //unit = "";
-                break;
-            case "ppm": //4
-                result = Number(value1) / 1000;
-                mode.value = value1 + " ppm a g/L:"
-                display.value = result;
-                unit = "";
-                break;
-            default:
-                console.log("Unit type not found");
-                break;
+    if(display.value !== ""){
+        value1 = display.value;
+        if(unit ===""){
+            unit = "g";
+            mode.value = value1 + " gs" + ". Elija unidad destino";
+        } else {
+            switch(unit){
+                case "mg": //1
+                    result = Number(value1) / 1000;
+                    mode.value = value1 + " mg a g:"
+                    display.value = result;
+                    unit = "";
+                    break;
+                case "mcg": //2
+                    result = Number(value1) / 1000000;
+                    mode.value = value1 + " mcg a g:"
+                    display.value = result;
+                    unit = "";
+                    break;
+                case "UI": //3
+                    result = Number(value1) / 1000000 / 0.03;
+                    mode.value = value1 + " UI (insulina porcina) to g:"
+                    display.value = result;
+                    unit = "";
+                    break;
+                case "ppm": //4
+                    result = Number(value1) / 1000;
+                    mode.value = value1 + " ppm a g/L:"
+                    display.value = result;
+                    unit = "";
+                    break;
+                default:
+                    console.log("Unit type not found");
+                    break;
+            }
         }
-    } else {
-        unit = "g";
-        mode.value = value1 + " gs" + ". Elija unidad destino";
-    }
+    } else mode.value = "Ingrese valor";   
 }
 function convMg(){ //Miligrams
-    if(unit !==""){
-        switch(unit){
-            case "g": //1
-                result = Number(value1) * 1000;
-                mode.value = value1 + "g a mg:"
-                display.value = result.toFixed(2);
-                //unit = "";
-                break;
-            case "mcg": //2
-                result = Number(value1) / 1000;
-                mode.value = value1 + "mcg a mg:"
-                display.value = result.toFixed(2);
-                unit = "";
-                break;
-            case "UI": //3
-                result = Number(value1) / 0.03;
-                mode.value = value1 + "UI to mg:"
-                display.value = result.toFixed(2);
-                unit = "";
-                break;
-            case "ppm": //4
-                result = Number(value1);
-                mode.value = value1 + " ppm to mg/L (1 ppm = 1mg/L):"
-                display.value = result.toFixed(2);
-                unit = "";
-                break;
-            default:
-                console.log("Unit type not found");
-                break;
+    if(display.value !== ""){
+        value1 = display.value;
+        if(unit ===""){
+            unit = "mg";
+            mode.value = value1 + " mg" + ". Elija unidad destino";
+        } else {
+            switch(unit){
+                case "g": //1
+                    result = Number(value1) * 1000;
+                    mode.value = value1 + "g a mg:"
+                    display.value = result.toFixed(2);
+                    unit = "";
+                    break;
+                    case "mcg": //2
+                    result = Number(value1) / 1000;
+                    mode.value = value1 + "mcg a mg:"
+                    display.value = result.toFixed(2);
+                    unit = "";
+                    break;
+                case "UI": //3
+                    result = Number(value1) / 0.03;
+                    mode.value = value1 + "UI to mg:"
+                    display.value = result.toFixed(2);
+                    unit = "";
+                    break;
+                case "ppm": //4
+                    result = Number(value1);
+                    mode.value = value1 + " ppm to mg/L (1 ppm = 1mg/L):"
+                    display.value = result.toFixed(2);
+                    unit = "";
+                    break;
+                default:
+                    console.log("Unit type not found");
+                    break;
+            }
         }
-    } else {
-        unit = "mg";
-        mode.value = value1 + " mg" + ". Elija unidad destino";
-    }
+    } else mode.value = "Ingrese valor";
 }
 function convMcg(){ //Micrograms
-    if(unit !==""){
-        switch(unit){
-            case "g": //1
-                result = Number(value1) * 1000000;
-                mode.value = value1 + " g a mcg:"
-                display.value = result.toFixed(2);
-                unit = "";
-                break;
-            case "mg": //2
-                result = Number(value1) * 1000;
-                mode.value = value1 + " mg a mcg:"
-                display.value = result.toFixed(2);
-                //unit = "";
-                break;
-            case "UI": //3
-                result = Number(value1) * 0.03;
-                mode.value = value1 + " UI (insulina porcina) a mcg:"
-                display.value = result.toFixed(2);
-                //unit = "";
-                break;
-            case "ppm": //4
-                result = Number(value1);
-                mode.value = value1 + " ppm to mcg/L:"
-                display.value = result.toFixed(2);
-                //unit = "";
-                break;
-            default:
-                console.log("Unit type not found");
-                break;
-            }
-        } else {
+    if(display.value !== ""){
+        value1 = display.value;
+        if(unit ===""){
             unit = "mcg";
             mode.value = value1 + " mcg" + ". Elija unidad destino";
-        }
+        } else {
+            switch(unit){
+                case "g": //1
+                    result = Number(value1) * 1000000;
+                    mode.value = value1 + " g a mcg:"
+                    display.value = result.toFixed(2);
+                    unit = "";
+                    break;
+                case "mg": //2
+                    result = Number(value1) * 1000;
+                    mode.value = value1 + " mg a mcg:"
+                    display.value = result.toFixed(2);
+                    unit = "";
+                    break;
+                case "UI": //3
+                    result = Number(value1) * 0.03;
+                    mode.value = value1 + " UI (insulina porcina) a mcg:"
+                    display.value = result.toFixed(2);
+                    unit = "";
+                    break;
+                case "ppm": //4
+                    result = Number(value1);
+                    mode.value = value1 + " ppm to mcg/L:"
+                    display.value = result.toFixed(2);
+                    unit = "";
+                    break;
+                default:
+                    console.log("Unit type not found");
+                    break;
+            }
+        }    
+    } else mode.value = "Ingrese valor";
 }
 function convPPM(){ //Parts Per Mille
-    if(unit !==""){
-        switch(unit){
-            case "g": //1
-                result = Number(value1) / 1000000
-                mode.value = value1 + " g/L a ppm:"
-                display.value = result.toFixed(2);
-                //unit = "";
-                break;
-            case "mg": //2
-                result = Number(value1) / 1000;
-                mode.value = value1 + " mg/L a ppm:"
-                display.value = result.toFixed(2);
-                //unit = "";
-                break;
-            case "mcg": //3
-                result = Number(value1) * 0.9988;
-                mode.value = value1 + " mcg/L a ppm:"
-                display.value = result.toFixed(4);
-                //unit = "";
-                break;
-            case "UI": //4: 1 stone is 224 ounces
-                result = (Number(value1) / 0.03) * 1000;
-                mode.value = value1 + " UI/L a ppm:"
-                display.value = result.toFixed(2);
-                //unit = "";
-                break;
-            default:
-                console.log("Unit type not found");
-                break;
+    if(display.value !== ""){
+        value1 = display.value;
+        if(unit ===""){
+            unit = "ppm";
+            mode.value = value1 + " ppm" + ". Elija unidad/L destino";
+        } else {
+            switch(unit){
+                case "g": //1
+                    result = Number(value1) / 1000000
+                    mode.value = value1 + " g/L a ppm:"
+                    display.value = result.toFixed(2);
+                    unit = "";
+                    break;
+                case "mg": //2
+                    result = Number(value1) / 1000;
+                    mode.value = value1 + " mg/L a ppm:"
+                    display.value = result.toFixed(2);
+                    unit = "";
+                    break;
+                case "mcg": //3
+                    result = Number(value1) * 0.9988;
+                    mode.value = value1 + " mcg/L a ppm:"
+                    display.value = result.toFixed(4);
+                    unit = "";
+                    break;
+                case "UI": //4: 1 stone is 224 ounces
+                    result = (Number(value1) / 0.03) * 1000;
+                    mode.value = value1 + " UI/L a ppm:"
+                    display.value = result.toFixed(2);
+                    unit = "";
+                    break;
+                default:
+                    console.log("Unit type not found");
+                    break;
+            }
         }
-    } else {
-        unit = "ppm";
-        mode.value = value1 + " ppm" + ". Elija unidad/L destino";
-    }
+    } else mode.value = "Ingrese valor";
 }
 function convUI(){ //International Units
-    if(unit !==""){
-        switch(unit){
-            case "g": //1
-                result = (Number(value1) * 1000000) / 0.03;
-                mode.value = value1 + " g a UI (insul. porcina):"
-                display.value = result.toFixed(2);
-                //unit = "";
-                break;
-            case "mg": //2
-                result = (Number(value1) * 1000) / 0.03;
-                mode.value = value1 + " mg a UI (insul. porcina):"
-                display.value = result.toFixed(2);
-                //unit = "";
-                break;
-            case "mcg": //3
-                result = Number(value1) * 0.03;
-                mode.value = value1 + " mcg a UI (insul. porcina):"
-                display.value = result.toFixed(4);
-                //unit = "";
-                break;
-            case "ppm": //4
-                result = Number(value1) * 0.03;
-                mode.value = value1 + " ppm to UI/L:"
-                display.value = result.toFixed(4);
-                //unit = "";
-                break;
-            default:
-                console.log("Unit type not found");
-                break;
-            }
-        } else {
+    if(display.value !== ""){
+        value1 = display.value; 
+        if(unit ===""){
             unit = "UI";
             mode.value = value1 + " " + unit + ". Elija unidad destino";
-        } 
+        } else {
+            switch(unit){
+                case "g": //1
+                    result = (Number(value1) * 1000000) / 0.03;
+                    mode.value = value1 + " g a UI (insul. porcina):"
+                    display.value = result.toFixed(2);
+                    unit = "";
+                    break;
+                case "mg": //2
+                    result = (Number(value1) * 1000) / 0.03;
+                    mode.value = value1 + " mg a UI (insul. porcina):"
+                    display.value = result.toFixed(2);
+                    unit = "";
+                    break;
+                case "mcg": //3
+                    result = Number(value1) * 0.03;
+                    mode.value = value1 + " mcg a UI (insul. porcina):"
+                    display.value = result.toFixed(4);
+                    unit = "";
+                    break;
+                case "ppm": //4
+                    result = Number(value1) * 0.03;
+                    mode.value = value1 + " ppm to UI/L:"
+                    display.value = result.toFixed(4);
+                    unit = "";
+                    break;
+                default:
+                    console.log("Unit type not found");
+                    break;
+                }
+        }
+    } else mode.value = "Ingrese valor"; 
 }   
 //--Temperature--
 function convC(){ //Celsius
-    if(unit !==""){
-        switch(unit){
-            case "F": //1
-                result = (Number(value1) * 1000000) / 0.03;
-                mode.value = value1 + " g a UI (insul. porcina):"
-                display.value = result.toFixed(2);
-                //unit = "";
-                break;
-            case "K": //2
-                result = (Number(value1) * 1000) / 0.03;
-                mode.value = value1 + " mg a UI (insul. porcina):"
-                display.value = result.toFixed(2);
-                //unit = "";
-                break;
-            default:
-                console.log("Unit type not found");
-                break;
-            }
-        } else {
+    if(display.value !== ""){
+        value1 = display.value;  
+        if(unit ===""){
             unit = "C";
             mode.value = value1 + " " + unit + ". Elija unidad destino";
-        } 
+        } else {
+            switch(unit){
+                case "F": //1
+                    result = (ParseFloat(value1) * 1.8) + 32;
+                    mode.value = value1 + " F a Celsius:"
+                    display.value = result.toFixed(2);
+                    unit = "";
+                    break;
+                case "K": //2
+                    result = (parseFloat(value1) - 273.15);
+                    mode.value = value1 + " K a Celsius:"
+                    display.value = result.toFixed(2);
+                    unit = "";
+                    break;
+                default:
+                    console.log("Unit type not found");
+                    break;
+            }
+        }
+    } else mode.value = "Ingrese valor";
 }
 function convF(){ //Fahrenheit
-    if(unit !==""){
-        switch(unit){
-            case "C": //1 (1°C = 33.8F)
-                result = Number(value1) * 33.8;
-                mode.value = value1 + " °C a Fahrenheit:"
-                display.value = result.toFixed(2);
-                unit = "";
-                break;
-            case "K": //2
-                result = Number(value1) * (-457.87);
-                mode.value = value1 + " Kelvin a Fahrenheit:"
-                display.value = result.toFixed(2);
-                unit = "";
-                break;
-            default:
-                console.log("Unit type not found");
-                break;
-            }
-        } else {
+    if(display.value !== ""){
+        value1 = display.value;
+        if(unit ===""){
             unit = "F";
             mode.value = value1 + " " + unit + ". Elija unidad destino";
-        } 
+        } else {
+            switch(unit){
+                case "C": //1
+                    result = (parseFloat(value1) * 1.8) + 32;
+                    mode.value = value1 + " °C a Fahrenheit:"
+                    display.value = result.toFixed(2);
+                    unit = "";
+                    break;
+                case "K": //2
+                    result = (parseFloat(value1) + 32) / 1.8;
+                    mode.value = value1 + " Kelvin a Fahrenheit:"
+                    display.value = result.toFixed(2);
+                    unit = "";
+                    break;
+                default:
+                    console.log("Unit type not found");
+                    break;
+            }
+        }
+    } else mode.value = "Ingrese valor"; 
 }
 function convK(){ //Kelvin
-    if(unit !==""){
-        switch(unit){
-            case "C": //1
-                result = (Number(value1) * 1000000) / 0.03;
-                mode.value = value1 + " g a UI (insul. porcina):"
-                display.value = result.toFixed(2);
-                unit = "";
-                break;
-            case "F": //2
-                result = (Number(value1) * 1000) / 0.03;
-                mode.value = value1 + " mg a UI (insul. porcina):"
-                display.value = result.toFixed(2);
-                unit = "";
-                break;
-            default:
-                console.log("Unit type not found");
-                break;
-            }
-        } else {
+    if(display.value !== ""){
+        value1 = display.value;
+        if(unit ===""){
             unit = "K";
             mode.value = value1 + " " + unit + ". Elija unidad destino";
+        } else {
+            switch(unit){
+                case "C": //1
+                        result = parseFloat(value1) + 273.15;
+                        mode.value = value1 + " °C a Kelvin:"
+                        display.value = result.toFixed(2);
+                        unit = "";
+                        break;
+                    case "F": //2
+                        result = (parseFloat(value1) + 459.67) * (5/9);
+                        mode.value = value1 + " F° a Kelvin:"
+                        display.value = result.toFixed(2);
+                        unit = "";
+                        break;
+                    default:
+                        console.log("Unit type not found");
+                        break;
+            }    
         } 
+    } else mode.value = "Ingrese valor";
 }
-
 
 function clickPressed(){
 
