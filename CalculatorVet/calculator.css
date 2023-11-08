@@ -66,8 +66,11 @@ form input.equalOperator{
 form input.operator{
     color: #33ffd8;
 }
-form input#circ{
+form input.smallLetter{
     font-size: 15px;   
+}
+form input.smallestLetter{
+    font-size: 13px;   
 }
 form input.modeStyle{
     background-color: darkslateblue;
@@ -96,11 +99,48 @@ ul, ol{
     position: relative;
 }
 .conversorMenu li ul li ul{
-    right: -2px;
+    right: -3px;
 }
 .conversorMenu li ul li ul li{
     display: block;
     top: -400px;
+}
+.vetMenu li{
+    display: block;
+}
+.vetMenu > li{
+    float: left;
+}
+.vetMenu li ul{
+    display: none;
+    position: absolute;
+}
+.vetMenu li:hover > ul{
+    display: block;
+}
+.vetMenu li ul li input:hover{
+    background-color: #c052bb;
+    
+}
+.vetMenu li ul li{
+    position: relative;
+    display: block;
+    top: -320px;
+    right: -3px;
+    
+}
+.vetMenu li ul li ul{
+    right: -80px;
+}
+.vetMenu li ul li ul li{
+    top: -240px;
+    
+}
+.VMenu li{
+    display: block;
+    top: 0;
+    right: 200px;
+    top: -1000px;
 }
 .conversorMenu li ul li ul li.subMenu{
     display: block;
