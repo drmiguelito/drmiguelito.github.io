@@ -53,14 +53,16 @@
                         <input type="button" value="Enter" class="equalOperator operator" id="enter" onclick="selectMode(this.id)"> 
                     </div>   
                     <!--Row 6 (mode options)-->
-                    <div>
+                    <div> 
+                        <!--Conversor Menu (u⇆): horizontal menu, vertical submenu-->
                         <ul class="conversorMenu">
                             <li>
                                 <input type="button" value="u⇆" id="modeConversor" class="modeStyle" onclick="selectMode(this.id)">
                                 <ul>
                                     <li>
+                                        <!---Vertical menu-->
                                         <input type="button" value="⚖️" class="modeStyle">
-                                        <ul>
+                                        <ul> <!--Hasta acá, oculto salvo con hover-->
                                             <li><input type="button" value="g" id="convGs" class="modeStyle" onclick="selectMode(this.id)"></li>
                                             <li><input type="button" value="mg" id="convMg" class="modeStyle" onclick="selectMode(this.id)"></li>
                                             <li><input type="button" value="µg " id="convMcg" class="modeStyle" onclick="selectMode(this.id)"></li>
@@ -88,17 +90,34 @@
                                     </li>
                                 </ul> 
                             </li>
-                            <input type="button" value="p%" id="modePerc" class="modeStyle" onclick="selectMode(this.id)">
-                            <input type="button" value="+p%" id="modeAddPerc" class="modeStyle" onclick="selectMode(this.id)">
-                            <input type="button" value="🏇" id="modeRacing" class="modeStyle" onclick="selectMode(this.id)">
                         </ul>
+                        <!--Vet Menu (Vet)-->
+                        <ul class="vetMenu">
+                            <li>
+                                <input type="button" value="Vet" id="vet" class="modeStyle VMenu" onclick="selectMode(this.id)">
+                                <ul>
+                                    <li><input type="button" value="vet2" id="AIE3d" class="modeStyle smallLetter" onclick="selectMode(this.id)"></li>
+                                    <li>
+                                        <input type="button" value="💧FT" id="cf" class="modeStyle smallLetter" onclick="selectMode(this.id)">
+                                            <ul>
+                                                <li><input type="button" value="Perd C" id="FT-PC" class="modeStyle HSubMenu smallestLetter" onclick="selectMode(this.id)"></li>
+                                                <li><input type="button" value="Mant" id="FT-M" class="modeStyle HSubMenu smallestLetter" onclick="selectMode(this.id)"></li>
+                                                <li><input type="button" value="Def P" id="FT-DP" class="modeStyle HSubMenu smallestLetter" onclick="selectMode(this.id)"></li>
+                                            </ul>
+                                    </li>
+                                    <li><input type="button" value="AIE/3" id="AIE3" class="modeStyle smallestLetter" onclick="selectMode(this.id)"></li>
+                                </ul>
+                            </li>
+                        </ul>
+                            <input type="button" value="+p%" id="modeAddPerc" class="modeStyle" onclick="selectMode(this.id)">
+                            <input type="button" value="AIE/3" id="AIE3" class="modeStyle smallLetter" onclick="selectMode(this.id)">            
                     </div>      
                     <!--Row 7 (Other options)-->
                     <div>
                         <input type="button" value="√" id="squareRoot" class="operator" onclick="selectMode(this.id)"> 
                         <input type="button" value="x^2" id="squared" class="operator" onclick="selectMode(this.id)"> 
                         <input type="button" value="ln" id="ln" class="operator" onclick="selectMode(this.id)"> 
-                        <input type="button" value="CIRC" id="circ" class="operator" onclick="selectMode(this.id)"> 
+                        <input type="button" value="CIRC" id="circ" class="operator smallLetter" onclick="selectMode(this.id)"> 
                     </div> 
                 </form>
             </div>
